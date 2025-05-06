@@ -2,4 +2,3 @@
 lib/*
 .vscode/*
 bin/*
-test_output.txt

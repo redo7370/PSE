@@ -9,7 +9,7 @@ public class PSETest {
 
     @Test
     public void testSomething() {
-        assertEquals(1, 1);
+        assertEquals(2, 1);
     }
 
     @Test

@@ -67,5 +67,6 @@ fi
 
 printf "\033[1;34m Tests insgesamt:\033[0m \033[1m%s\033[0m   \033[1;32m Bestanden:\033[0m \033[1m%s\033[0m   \033[1;31m Fehlgeschlagen:\033[0m \033[1m%s\033[0m\n" "$total" "$passed" "$failed"
 
+rm test_output.txt
 
 exit 0
