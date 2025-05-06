@@ -1,4 +1,5 @@
 .DS_Store
-lib*
+lib/*
 .vscode/*
 bin/*
+test_output.txt
