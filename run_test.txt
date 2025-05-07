@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT="./run_test.sh"
+
+if [[ -x "$SCRIPT" ]]; then
+  "$SCRIPT"
+else
+  echo "run_test.sh not found or not executable in the current directory"
+fi
+
+
+__________
+
+Global Script in Root directory
+--> if implemented: run_test can be used as a command to run the test scripts if the foleder structure is correct

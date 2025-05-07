@@ -5,7 +5,7 @@ HAMCREST="lib/hamcrest-core-1.3.jar"
 
 javac -d bin -cp "bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" src/test/PSETest.java src/**/*.java
 if [ $? -ne 0 ]; then
-    echo "❌ Kompilierung fehlgeschlagen"
+    echo "Kompilierung fehlgeschlagen"
     exit 1
 fi
 
@@ -14,8 +14,6 @@ java -cp "bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.J
 total=0
 passed=0
 failed=0
-
-# Fehlgeschlagene Tests anzeigen
 
 if grep -q "Tests run:" test_output.txt; then
     result_line=$(grep "Tests run:" test_output.txt)
@@ -29,9 +27,12 @@ else
     failed=0
 fi
 
-# Vereinfachte Darstellung fehlgeschlagener Tests
+echo ""
+echo "Only assertEquals is reported!"
+echo ""
+
 if [ "$failed" -ne 0 ]; then
-    echo -e "\n\033[1;31mVereinfachte Darstellung fehlgeschlagener Tests:\033[0m"
+    echo -e "\n\033[1;31mFailed Tests:\033[0m"
     
     awk '
         BEGIN { show = 0 }
@@ -65,7 +66,7 @@ if [ "$failed" -ne 0 ]; then
 
 fi
 
-printf "\033[1;34m Tests insgesamt:\033[0m \033[1m%s\033[0m   \033[1;32m Bestanden:\033[0m \033[1m%s\033[0m   \033[1;31m Fehlgeschlagen:\033[0m \033[1m%s\033[0m\n" "$total" "$passed" "$failed"
+printf "\033[1;34m Total Tests:\033[0m \033[1m%s\033[0m   \033[1;32m Passed:\033[0m \033[1m%s\033[0m   \033[1;31m Failed:\033[0m \033[1m%s\033[0m\n" "$total" "$passed" "$failed"
 
 rm test_output.txt
 
