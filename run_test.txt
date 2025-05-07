@@ -12,4 +12,7 @@ fi
 __________
 
 Global Script in Root directory
---> if implemented: run_test can be used as a command to run the test scripts if the foleder structure is correct
+--> if implemented: run_test can be used as a command to run the test scripts if the folder structure is correct
+
+working directory --> run_test.sh
+any subdirectory of the working directory --> test.sh (if there're more than one test.sh, the first one found will be executed only)
