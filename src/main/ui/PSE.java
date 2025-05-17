@@ -144,19 +144,4 @@ public class PSE extends JFrame {
     }
 
 
-    public static void main(String[] args) {
-        
-
-         // GUI Issue Handling For macOS
-         try {
-            UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
-        } catch (UnsupportedLookAndFeelException e) {
-            System.err.println("Cannot set LookAndFeel");
-        }
-
-        // Reserve Thread To Run The GUI
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            SwingUtilities.invokeLater(PSE::new); // –––– START PROGRAM –––– //
-        });
-    }
 }

@@ -1,9 +1,11 @@
 package main.data;
 
+import java.util.Map;
+
 public class ChemicalElement {
     private final int atomicNumber;
     private final String symbol;
-    private final String[] names;
+    private final Map<String, String> names;
     private final double atomicWeight;
     private final double electronegativity;
     private final String electronConfig;
@@ -11,11 +13,21 @@ public class ChemicalElement {
     private final int boilingPoint;
     private final int[] oxidationNums;
     private final double standardElectrodePotential;
-    private final boolean extra;
+    private final Map<String, String> group;
 
-    private final int EXITNUM = -1000;
-
-    public ChemicalElement(int num, String letter, String[] elementNames, double weight, double negativity, String eConfig, int melt, int boil, int[] oxidation, double electrodePotential){
+    public ChemicalElement(
+        int num, 
+        String letter,
+        Map<String, String> elementNames,
+        double weight,
+        double negativity,
+        String eConfig,
+        int melt,
+        int boil,
+        int[] oxidation,
+        double electrodePotential,
+        Map<String, String> type
+        ) {
         this.atomicNumber = num;
         this.symbol = letter;
         this.names = elementNames;
@@ -26,62 +38,7 @@ public class ChemicalElement {
         this.boilingPoint = boil;
         this.oxidationNums = oxidation;
         this.standardElectrodePotential = electrodePotential;
-        this.extra = false;
-    }
-    public ChemicalElement(int num, String letter, String[] elementNames, double weight, String eConfig, int melt, int boil, int[] oxidation, double electrodePotential){
-        this.atomicNumber = num;
-        this.symbol = letter;
-        this.names = elementNames;
-        this.atomicWeight = weight;
-        this.electronegativity = EXITNUM;
-        this.electronConfig = eConfig;
-        this.meltingPoint = melt;
-        this.boilingPoint = boil;
-        this.oxidationNums = oxidation;
-        this.standardElectrodePotential = electrodePotential;
-        this.extra = false;
-    }
-
-    public ChemicalElement(int num, String letter, String[] elementNames, double weight, String eConfig, int melt, int boil){
-        this.atomicNumber = num;
-        this.symbol = letter;
-        this.names = elementNames;
-        this.atomicWeight = weight;
-        this.electronegativity = -1000;
-        this.electronConfig = eConfig;
-        this.meltingPoint = melt;
-        this.boilingPoint = boil;
-        this.oxidationNums = new int[] {EXITNUM};
-        this.standardElectrodePotential = EXITNUM;
-        this.extra = false;
-    }
-
-    public ChemicalElement(int num, String letter, String[] elementNames, double weight, double negativity, String eConfig, int melt, int boil, int[] oxidation, double electrodePotential, boolean xtra){
-        this.atomicNumber = num;
-        this.symbol = letter;
-        this.names = elementNames;
-        this.atomicWeight = weight;
-        this.electronegativity = negativity;
-        this.electronConfig = eConfig;
-        this.meltingPoint = melt;
-        this.boilingPoint = boil;
-        this.oxidationNums = oxidation;
-        this.standardElectrodePotential = electrodePotential;
-        this.extra = xtra;
-    }
-
-    public ChemicalElement(int num, String letter, String[] elementNames, double weight, double negativity, String eConfig, int[] oxidation, double electrodePotential, boolean xtra){
-        this.atomicNumber = num;
-        this.symbol = letter;
-        this.names = elementNames;
-        this.atomicWeight = weight;
-        this.electronegativity = negativity;
-        this.electronConfig = eConfig;
-        this.meltingPoint = EXITNUM;
-        this.boilingPoint = EXITNUM;
-        this.oxidationNums = oxidation;
-        this.standardElectrodePotential = electrodePotential;
-        this.extra = xtra;
+        this.group = type;
     }
 
     public int getAtomicNumber(){
@@ -92,7 +49,7 @@ public class ChemicalElement {
         return this.symbol;
     }
 
-    public String[] getName(){
+    public Map<String, String> getNames(){
        return this.names;
     }
 
@@ -124,7 +81,7 @@ public class ChemicalElement {
         return this.standardElectrodePotential;
     }
 
-    public boolean isExtra(){
-        return this.extra;
+    public Map<String, String> isExtra(){
+        return this.group;
     }
 }

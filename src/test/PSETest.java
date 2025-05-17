@@ -7,7 +7,6 @@ import main.data.PeriodicTable;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
-import java.util.Scanner;
 
 // Nur AssertEquals wird im Bash Skript berücksichtigt
 
