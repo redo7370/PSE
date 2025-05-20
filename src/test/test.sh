@@ -28,7 +28,7 @@ else
 fi
 
 echo ""
-echo "Only assertEquals is reported! (May encounter errors when working with non-alphanumeric comparisons)"
+echo "Only assertEquals is reported! (May encounter errors)"
 echo ""
 
 if [ "$failed" -ne 0 ]; then

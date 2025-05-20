@@ -5,7 +5,7 @@ import java.awt.Color;
 public class PeriodicTable {
     
     private static final Color MAIN_BG = new Color(64, 63, 60);
-    public static final String[][] ELEMENTS = {
+    private static final String[][] ELEMENTS = {
         {"H", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "He"},
         {"Li", "Be", "", "", "", "", "", "", "", "", "", "", "B", "C", "N", "O", "F", "Ne"},
         {"Na", "Mg", "", "", "", "", "", "", "", "", "", "", "Al", "Si", "P", "S", "Cl", "Ar"},
@@ -76,5 +76,13 @@ public class PeriodicTable {
         }
         
         return MAIN_BG; 
+    }
+
+    public static String[][] getElementTable() {
+        return ELEMENTS;
+    }
+
+    public static Color getMAINBG() {
+        return MAIN_BG;
     }
 }

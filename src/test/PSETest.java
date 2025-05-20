@@ -15,8 +15,7 @@ public class PSETest {
     @Test
     public void testGetElementColor() {
         Color color = PeriodicTable.getElementColor("Mg");
-
-        assertEquals(new Color(152, 173, 121), color);
+        assertArrayEquals(new int[] {152, 173, 121}, new int[] { color.getRed(), color.getGreen(), color.getBlue() });
     }
 
 }

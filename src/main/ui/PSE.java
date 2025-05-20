@@ -2,26 +2,16 @@ package main.ui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
+import main.data.Elements;
 import main.data.PeriodicTable;
 
 public class PSE extends JFrame {
 
-    // List of Elements
-    private static final String[][] ELEMENTS = {
-        {"H", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "He"},
-        {"Li", "Be", "", "", "", "", "", "", "", "", "", "", "B", "C", "N", "O", "F", "Ne"},
-        {"Na", "Mg", "", "", "", "", "", "", "", "", "", "", "Al", "Si", "P", "S", "Cl", "Ar"},
-        {"K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr"},
-        {"Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe"},
-        {"Cs", "Ba", "La", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn"},
-        {"Fr", "Ra", "Ac", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"}
-    };
-
     private static int maxColumns;
     private static final int MAX_ROWS = 7;
-    private static final Color MAIN_BG = new Color(64, 63, 60);
     private static JTextField inputField;
     private static JLabel label, fillerLabel;
     private static JButton menuButton, confirmButton;
@@ -30,10 +20,10 @@ public class PSE extends JFrame {
         setTitle("Periodensystem der Elemente");
         setSize(1000, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBackground(MAIN_BG);
+        setBackground(PeriodicTable.getMAINBG());
 
         maxColumns = 0;
-        for (String[] row : PeriodicTable.ELEMENTS) {
+        for (String[] row : PeriodicTable.getElementTable()) {
             maxColumns = Math.max(maxColumns, row.length);
         }
     
@@ -46,11 +36,11 @@ public class PSE extends JFrame {
             for (int j = 0; j < maxColumns; j++) {
                 
                 // Empty Fields
-                if (PeriodicTable.ELEMENTS[i][j].equals("")){ //TODO: Change to automatic detection
+                if (PeriodicTable.getElementTable()[i][j].equals("")){ //TODO: Change to automatic detection
                     label = new JLabel(" ");
-                    label.setBackground(PeriodicTable.getElementColor(ELEMENTS[i][j]));
+                    label.setBackground(PeriodicTable.getElementColor(PeriodicTable.getElementTable()[i][j]));
                     label.setOpaque(true);
-                    label.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+                    label.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
 
                     gbc.gridx = j;
                     gbc.gridy = i;
@@ -64,10 +54,10 @@ public class PSE extends JFrame {
                 }
 
                 // Set Fields
-                label = new JLabel(" " + PeriodicTable.ELEMENTS[i][j]);
-                label.setBackground(PeriodicTable.getElementColor(ELEMENTS[i][j]));
+                label = new JLabel(" " + PeriodicTable.getElementTable()[i][j]);
+                label.setBackground(PeriodicTable.getElementColor(PeriodicTable.getElementTable()[i][j]));
                 label.setOpaque(true);
-                label.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+                label.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
                 
                 gbc.gridx = j;
                 gbc.gridy = i;
@@ -89,9 +79,9 @@ public class PSE extends JFrame {
         gbc.weighty = 20;
         gbc.gridwidth = maxColumns;
         fillerLabel = new JLabel(" ");
-        fillerLabel.setBackground(MAIN_BG);
+        fillerLabel.setBackground(PeriodicTable.getMAINBG());
         fillerLabel.setOpaque(true);
-        fillerLabel.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+        fillerLabel.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
         add(fillerLabel, gbc);
 
         // Input Field //
@@ -105,7 +95,7 @@ public class PSE extends JFrame {
         inputField = new JTextField();
         inputField.setBackground(new Color(150, 150, 150));
         inputField.setOpaque(true);
-        inputField.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+        inputField.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
         add(inputField, gbc);
 
         // Confirm Button //
@@ -119,9 +109,17 @@ public class PSE extends JFrame {
         confirmButton = new JButton("Eingabe bestätigen");
         confirmButton.setBackground(new Color(150, 150, 150));
         confirmButton.setOpaque(true);
-        confirmButton.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+        confirmButton.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
         add(confirmButton, gbc);
 
+        confirmButton.addActionListener((final ActionEvent e) -> {
+            String input = inputField.getText();
+
+            if (!(Elements.getElement(input) == null)) {
+                new ElementWindow(Elements.getElement(input)); 
+            }
+        });
+        
         // Menu Button //
         gbc.gridx = maxColumns - 2;
         gbc.gridy = 9;
@@ -133,11 +131,11 @@ public class PSE extends JFrame {
         menuButton = new JButton("Menü");
         menuButton.setBackground(new Color(150, 150, 150));
         menuButton.setOpaque(true);
-        menuButton.setBorder(BorderFactory.createLineBorder(MAIN_BG, 2));
+        menuButton.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
         add(menuButton, gbc);
-
+        
         menuButton.addActionListener((final ActionEvent e) -> {
-            new Menu(MAIN_BG);
+            new Menu(PeriodicTable.getMAINBG());
         });
         
         setVisible(true);

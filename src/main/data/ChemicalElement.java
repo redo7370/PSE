@@ -16,29 +16,29 @@ public class ChemicalElement {
     private final Map<String, String> group;
 
     public ChemicalElement(
-        int num, 
-        String letter,
-        Map<String, String> elementNames,
-        double weight,
-        double negativity,
-        String eConfig,
-        int melt,
-        int boil,
-        int[] oxidation,
-        double electrodePotential,
-        Map<String, String> type
+        int atomicNumber, 
+        String symbol,
+        Map<String, String> names,
+        double atomicWeight,
+        double electronegativity,
+        String electronConfig,
+        int meltingPoint,
+        int boilingPoint,
+        int[] oxidationNums,
+        double standardElectrodePotential,
+        Map<String, String> group
         ) {
-        this.atomicNumber = num;
-        this.symbol = letter;
-        this.names = elementNames;
-        this.atomicWeight = weight;
-        this.electronegativity = negativity;
-        this.electronConfig = eConfig;
-        this.meltingPoint = melt;
-        this.boilingPoint = boil;
-        this.oxidationNums = oxidation;
-        this.standardElectrodePotential = electrodePotential;
-        this.group = type;
+        this.atomicNumber = atomicNumber;
+        this.symbol = symbol;
+        this.names = names;
+        this.atomicWeight = atomicWeight;
+        this.electronegativity = electronegativity;
+        this.electronConfig = electronConfig;
+        this.meltingPoint = meltingPoint;
+        this.boilingPoint = boilingPoint;
+        this.oxidationNums = oxidationNums;
+        this.standardElectrodePotential = standardElectrodePotential;
+        this.group = group;
     }
 
     public int getAtomicNumber(){

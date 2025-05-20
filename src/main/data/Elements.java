@@ -3329,36 +3329,16 @@ public class Elements {
 
     public static ChemicalElement getElement(String nameENG) {
         for (ChemicalElement chemicalElement : LIST_OF_ELEMENTS) {
-            if (nameENG.equals(chemicalElement.getNames().get("en"))) { return chemicalElement;}
+            if (nameENG.equals(chemicalElement.getNames().get("de"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getNames().get("en"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getNames().get("fr"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getNames().get("zh"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getNames().get("ru"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getNames().get("jp"))) { return chemicalElement; }
+            if (nameENG.equals(chemicalElement.getSymbol())) { return chemicalElement; }
         }
         
-        return new ChemicalElement(
-            -1,
-            "ERR",
-            Map.ofEntries(
-                Map.entry("de", "ERR"),
-                Map.entry("en", "ERR"),
-                Map.entry("fr", "ERR"),
-                Map.entry("zh", "ERR"),
-                Map.entry("ru", "ERR"),
-                Map.entry("jp", "ERR")
-            ),
-            Integer.MIN_VALUE,
-            Double.NaN,
-            "ERR",
-            Integer.MIN_VALUE,
-            Integer.MIN_VALUE,
-            new int[]{},
-            Double.NaN,
-            Map.ofEntries(
-                Map.entry("de", "ERR"),
-                Map.entry("en", "ERR"),
-                Map.entry("fr", "ERR"),
-                Map.entry("zh", "ERR"),
-                Map.entry("ru", "ERR"),
-                Map.entry("jp", "ERR")
-                )
-            );
+        return null;
     }
 
 }
