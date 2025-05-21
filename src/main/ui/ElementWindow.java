@@ -2,6 +2,7 @@ package main.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.stream.IntStream;
 
 import main.data.ChemicalElement;
 import main.data.Elements;
@@ -9,9 +10,13 @@ import main.data.PeriodicTable;
 
 public class ElementWindow extends JFrame {
 
+    private final byte elementIndex;
+
     public ElementWindow(ChemicalElement element) {
 
-        setTitle("Element: " + element.getNames().get("de"));
+        this.elementIndex = element.getAtomicNumber();
+
+        setTitle(element.getNames().get("de"));
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -40,7 +45,7 @@ public class ElementWindow extends JFrame {
         addDetail(detailsPanel, "Elektronenkonfiguration:", element.getElectronConfiguration(), 1);
         addDetail(detailsPanel, "Schmelzpunkt (°K):", String.valueOf(element.getMeltingPoint()), 0);
         addDetail(detailsPanel, "Siedepunkt (°K):", String.valueOf(element.getBoilingPoint()), 1);
-        addDetail(detailsPanel, "Oxidationszahlen:", oxidationArrayToString(element.getOxidationNumbers()), 0);
+        addDetail(detailsPanel, "Oxidationszahlen:", oxidationArrayToString(IntStream.range(0, element.getOxidationNumbers().length).map(i -> element.getOxidationNumbers()[i]).toArray()), 0);
         addDetail(detailsPanel, "Standardpotential (V):", String.valueOf(element.getStandardPotential()), 1);
         addDetail(detailsPanel, "Gruppe:", element.isExtra().getOrDefault("de", "-"), 0);
 
@@ -79,6 +84,10 @@ public class ElementWindow extends JFrame {
     private Color getContrastColor(Color bg) {
         double luminance = (0.299 * bg.getRed() + 0.587 * bg.getGreen() + 0.114 * bg.getBlue()) / 255;
         return luminance > 0.5 ? Color.BLACK : Color.WHITE;
+    }
+
+    public byte getElementNum(){
+        return this.elementIndex;
     }
 
     // Beispielmain zum Testen

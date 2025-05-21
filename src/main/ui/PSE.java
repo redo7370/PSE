@@ -2,9 +2,9 @@ package main.ui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
+import main.data.ChemicalElement;
 import main.data.Elements;
 import main.data.PeriodicTable;
 
@@ -113,12 +113,40 @@ public class PSE extends JFrame {
         add(confirmButton, gbc);
 
         confirmButton.addActionListener((final ActionEvent e) -> {
-            String input = inputField.getText();
+            String input = inputField.getText().trim();
 
-            if (!(Elements.getElement(input) == null)) {
-                new ElementWindow(Elements.getElement(input)); 
+            if (input.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Bitte ein Element eingeben.");
+                return;
             }
+
+            ChemicalElement element = Elements.getElement(input);
+
+            if (element == null) {
+                JOptionPane.showMessageDialog(null, "Element nicht gefunden: " + input);
+                return;
+            }
+
+            byte targetAtomicNumber = element.getAtomicNumber();
+
+            // Alle offenen Fenster durchgehen
+            for (Frame frame : Frame.getFrames()) {
+                if (frame instanceof ElementWindow ew && frame.isDisplayable()) {
+                    if (ew.getElementNum() == targetAtomicNumber) {
+                        // Fenster gefunden, das dieses Element bereits darstellt
+                        frame.toFront();        // Bringt das Fenster in den Vordergrund
+                        frame.requestFocus();   // Setzt den Fokus auf das Fenster
+                        frame.setState(Frame.NORMAL); // Falls minimiert, wiederherstellen
+                        return; // Kein neues Fenster öffnen
+                    }
+                }
+            }
+
+            // Fenster wurde nicht gefunden – neues Fenster öffnen
+            new ElementWindow(element);
         });
+
+
         
         // Menu Button //
         gbc.gridx = maxColumns - 2;

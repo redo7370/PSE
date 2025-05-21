@@ -5,7 +5,7 @@ import java.util.Map;
 public class Elements {
 
     private final static ChemicalElement HYDROGEN = new ChemicalElement(
-        1, 
+        (byte) 1, 
         "H",
         Map.ofEntries(
             Map.entry("de", "Wasserstoff"),
@@ -20,7 +20,7 @@ public class Elements {
         "1s^1",
         14,      // Schmelzpunkt  -259 °C + 273.15 = 14.15 K (gerundet)
         20,      // Siedepunkt  -253 °C + 273.15 = 20.15 K (gerundet)
-        new int[] {1, -1},
+        new byte[] {1, -1},
         0.00,
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -33,7 +33,7 @@ public class Elements {
     );
 
     private final static ChemicalElement HELIUM = new ChemicalElement(
-        2,
+        (byte) 2,
         "He",
         Map.ofEntries(
             Map.entry("de", "Helium"),
@@ -48,7 +48,7 @@ public class Elements {
         "1s^2",
         Integer.MIN_VALUE, // Schmelzpunkt nicht definiert (Helium schmilzt nur unter Druck)
         4,                // Siedepunkt in Kelvin
-        new int[]{},      // Keine Oxidationszahlen bekannt
+        new byte[]{},      // Keine Oxidationszahlen bekannt
         Double.NaN,       // Standardelektrodenpotential nicht definiert
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -62,7 +62,7 @@ public class Elements {
 
 
     private final static ChemicalElement LITHIUM = new ChemicalElement(
-        3,
+        (byte) 3,
         "Li",
         Map.ofEntries(
             Map.entry("de", "Lithium"),
@@ -77,7 +77,7 @@ public class Elements {
         "[He] 2s^1",
         454,     // 181 °C + 273.15 = 454.15 K (gerundet)
         1620,    // 1347 °C + 273.15 = 1620.15 K (gerundet)
-        new int[] {1},
+        new byte[] {1},
         -3.04,
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -90,7 +90,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BERYLLIUM = new ChemicalElement(
-        4,
+        (byte) 4,
         "Be",
         Map.ofEntries(
             Map.entry("de", "Beryllium"),
@@ -105,7 +105,7 @@ public class Elements {
         "[He] 2s^2",
         1560,    // 1287 °C + 273.15 = 1560.15 K (gerundet)
         2743,    // 2470 °C + 273.15 = 2743.15 K (gerundet)
-        new int[]{2},
+        new byte[]{2},
         -1.85,
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -118,7 +118,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BORON = new ChemicalElement(
-        5,
+        (byte) 5,
         "B",
         Map.ofEntries(
             Map.entry("de", "Bor"),
@@ -133,7 +133,7 @@ public class Elements {
         "[He] 2s^2 2p^1",
         2349,   // 2076 °C + 273.15 = 2349.15 K (gerundet)
         4200,   // 3927 °C + 273.15 = 4200.15 K (gerundet)
-        new int[]{3},
+        new byte[]{3},
         -0.87,  // Geschätztes elektrochemisches Potential (selten als Ion)
         Map.ofEntries(
             Map.entry("de", "Metalloid"),
@@ -146,7 +146,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CARBON = new ChemicalElement(
-        6,
+        (byte) 6,
         "C",
         Map.ofEntries(
             Map.entry("de", "Kohlenstoff"),
@@ -161,7 +161,7 @@ public class Elements {
         "[He] 2s^2 2p^2",
         3823,   // 3550 °C + 273.15 = 3823.15 K (gerundet)
         5100,   // 4827 °C + 273.15 = 5100.15 K (gerundet)
-        new int[]{4, 2, -4},
+        new byte[]{4, 2, -4},
         -0.20,  // Geschätztes Elektrodenpotential, stark zustandsabhängig (Graphit, Diamant, etc.)
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -174,7 +174,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NITROGEN = new ChemicalElement(
-        7,
+        (byte) 7,
         "N",
         Map.ofEntries(
             Map.entry("de", "Stickstoff"),
@@ -189,7 +189,7 @@ public class Elements {
         "[He] 2s^2 2p^3",
         63,     // -210 °C + 273.15 = 63.15 K (gerundet)
         77,     // -196 °C + 273.15 = 77.15 K (gerundet)
-        new int[]{3, 5, -3},
+        new byte[]{3, 5, -3},
         Double.NaN,   // Standardelektrodenpotential ca. 0 V (reaktionsabhängig)
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -202,7 +202,7 @@ public class Elements {
     );
 
     private final static ChemicalElement OXYGEN = new ChemicalElement(
-        8,
+        (byte) 8,
         "O",
         Map.ofEntries(
             Map.entry("de", "Sauerstoff"),
@@ -217,7 +217,7 @@ public class Elements {
         "[He] 2s^2 2p^4",
         54,     // -219 °C + 273.15 = 54.15 K (gerundet)
         90,     // -183 °C + 273.15 = 90.15 K (gerundet)
-        new int[]{-2},
+        new byte[]{-2},
         1.23,   // Standard-Elektrodenpotential O₂ + 4H⁺ + 4e⁻ → 2H₂O
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -230,7 +230,7 @@ public class Elements {
     );
 
     private final static ChemicalElement FLUORINE = new ChemicalElement(
-        9,
+        (byte) 9,
         "F",
         Map.ofEntries(
             Map.entry("de", "Fluor"),
@@ -245,7 +245,7 @@ public class Elements {
         "[He] 2s^2 2p^5",
         53,     // -220 °C + 273.15 = 53.15 K (gerundet)
         85,     // -188 °C + 273.15 = 85.15 K (gerundet)
-        new int[]{-1},
+        new byte[]{-1},
         2.87,   // Standard-Elektrodenpotential F₂ + 2e⁻ → 2F⁻
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -258,7 +258,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NEON = new ChemicalElement(
-        10,
+        (byte) 10,
         "Ne",
         Map.ofEntries(
             Map.entry("de", "Neon"),
@@ -273,7 +273,7 @@ public class Elements {
         "[He] 2s^2 2p^6",
         24,     
         27,     
-        new int[]{},   // keine Oxidationszahlen
+        new byte[]{},   // keine Oxidationszahlen
         Double.NaN,    // kein elektrochemisches Potential
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -287,7 +287,7 @@ public class Elements {
 
 
     private final static ChemicalElement SODIUM = new ChemicalElement(
-        11,
+        (byte) 11,
         "Na",
         Map.ofEntries(
             Map.entry("de", "Natrium"),
@@ -302,7 +302,7 @@ public class Elements {
         "[Ne] 3s^1",
         371,    // 98 °C + 273.15 = 371.15 K (gerundet)
         1156,   // 883 °C + 273.15 = 1156.15 K (gerundet)
-        new int[]{1},
+        new byte[]{1},
         -2.71,  // Standardelektrodenpotential: Na⁺ + e⁻ → Na(s)
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -315,7 +315,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MAGNESIUM = new ChemicalElement(
-        12,
+        (byte) 12,
         "Mg",
         Map.ofEntries(
             Map.entry("de", "Magnesium"),
@@ -330,7 +330,7 @@ public class Elements {
         "[Ne] 3s^2",
         923,    // 650 °C + 273.15 = 923.15 K (gerundet)
         1364,   // 1091 °C + 273.15 = 1364.15 K (gerundet)
-        new int[]{2},
+        new byte[]{2},
         -2.37,  // Standardelektrodenpotential: Mg²⁺ + 2e⁻ → Mg(s)
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -343,7 +343,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ALUMINUM = new ChemicalElement(
-        13,
+        (byte) 13,
         "Al",
         Map.ofEntries(
             Map.entry("de", "Aluminium"),
@@ -358,7 +358,7 @@ public class Elements {
         "[Ne] 3s^2 3p^1",
         933,    // 660 °C + 273.15 = 933.15 K (gerundet)
         2743,   // 2470 °C + 273.15 = 2743.15 K (gerundet)
-        new int[]{3},
+        new byte[]{3},
         -1.66,  // Standardelektrodenpotential: Al³⁺ + 3e⁻ → Al(s)
         Map.ofEntries(
             Map.entry("de", "Leichtmetall"),      // Aluminium ist eher Leichtmetall als Übergangsmetall
@@ -371,7 +371,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SILICON = new ChemicalElement(
-        14,
+        (byte) 14,
         "Si",
         Map.ofEntries(
             Map.entry("de", "Silicium"),
@@ -386,7 +386,7 @@ public class Elements {
         "[Ne] 3s^2 3p^2",
         1687,  // 1414 °C = 1687 K
         3538,  // 3265 °C = 3538 K
-        new int[]{4, -4},
+        new byte[]{4, -4},
         Double.NaN,  // Geschätztes elektrochemisches Potential (ungefähr, da Halbleiter)
         Map.ofEntries(
             Map.entry("de", "Halbleiter"),
@@ -399,7 +399,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PHOSPHORUS = new ChemicalElement(
-        15,
+        (byte) 15,
         "P",
         Map.ofEntries(
             Map.entry("de", "Phosphor"),
@@ -414,7 +414,7 @@ public class Elements {
         "[Ne] 3s^2 3p^3",
         317,   // 44 °C = 317 K
         553,   // 280 °C = 553 K
-        new int[]{5, 3, -3},
+        new byte[]{5, 3, -3},
         Double.NaN,  // Kein klar definierbares elektrochemisches Potential (komplex, kein Standardwert)
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -427,7 +427,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SULFUR = new ChemicalElement(
-        16,
+        (byte) 16,
         "S",
         Map.ofEntries(
             Map.entry("de", "Schwefel"),
@@ -442,7 +442,7 @@ public class Elements {
         "[Ne] 3s^2 3p^4",
         388,   // 115 °C = 388 K
         718,   // 445 °C = 718 K
-        new int[]{-2, 2, 4, 6},
+        new byte[]{-2, 2, 4, 6},
         0.14,  // Geschätztes Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -455,7 +455,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CHLORINE = new ChemicalElement(
-        17,
+        (byte) 17,
         "Cl",
         Map.ofEntries(
             Map.entry("de", "Chlor"),
@@ -470,7 +470,7 @@ public class Elements {
         "[Ne] 3s^2 3p^5",
         172,   // -101 °C = 172 K
         238,   // -35 °C = 238 K
-        new int[]{-1, 1, 3, 5, 7},
+        new byte[]{-1, 1, 3, 5, 7},
         1.36,  // Standard-Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -483,7 +483,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ARGON = new ChemicalElement(
-        18,
+        (byte) 18,
         "Ar",
         Map.ofEntries(
             Map.entry("de", "Argon"),
@@ -498,7 +498,7 @@ public class Elements {
         "[Ne] 3s^2 3p^6",
         84,     // -189 °C = 84 K
         87,     // -186 °C = 87 K
-        new int[]{},  // Keine Oxidationszahlen (Edelgas)
+        new byte[]{},  // Keine Oxidationszahlen (Edelgas)
         Double.NaN,    // Elektrodenpotential nicht definiert (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -511,7 +511,7 @@ public class Elements {
     );
 
     private final static ChemicalElement POTASSIUM = new ChemicalElement(
-        19,
+        (byte) 19,
         "K",
         Map.ofEntries(
             Map.entry("de", "Kalium"),
@@ -526,7 +526,7 @@ public class Elements {
         "[Ar] 4s^1",
         337,   // 64 °C = 337 K
         1047,  // 774 °C = 1047 K
-        new int[]{1},
+        new byte[]{1},
         -2.93,  // Standard-Elektrodenpotential (häufig -2.93 V, geschätzt)
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -539,7 +539,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CALCIUM = new ChemicalElement(
-        20,
+        (byte) 20,
         "Ca",
         Map.ofEntries(
             Map.entry("de", "Calcium"),
@@ -554,7 +554,7 @@ public class Elements {
         "[Ar] 4s^2",
         1115,  // 842 °C = 1115 K
         1757,  // 1484 °C = 1757 K
-        new int[]{2},
+        new byte[]{2},
         -2.87,  // Standard-Elektrodenpotential (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -567,7 +567,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SCANDIUM = new ChemicalElement(
-        21,
+        (byte) 21,
         "Sc",
         Map.ofEntries(
             Map.entry("de", "Scandium"),
@@ -582,7 +582,7 @@ public class Elements {
         "[Ar] 3d^1 4s^2",
         1814,  // 1541 °C = 1814 K
         3109,  // 2836 °C = 3109 K
-        new int[]{3},
+        new byte[]{3},
         -2.10,  // Standard-Elektrodenpotential (geschätzt, schwierig zu finden)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -595,7 +595,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TITANIUM = new ChemicalElement(
-        22,
+        (byte) 22,
         "Ti",
         Map.ofEntries(
             Map.entry("de", "Titan"),
@@ -610,7 +610,7 @@ public class Elements {
         "[Ar] 3d^2 4s^2",
         1941,  // 1668 °C = 1941 K
         3560,  // 3287 °C = 3560 K
-        new int[]{4, 3, 2},
+        new byte[]{4, 3, 2},
         -1.63,  // Standard-Elektrodenpotential (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -623,7 +623,7 @@ public class Elements {
     );
 
     private final static ChemicalElement VANADIUM = new ChemicalElement(
-        23,
+        (byte) 23,
         "V",
         Map.ofEntries(
             Map.entry("de", "Vanadium"),
@@ -638,7 +638,7 @@ public class Elements {
         "[Ar] 3d^3 4s^2",
         2183,  // 1910 °C = 2183 K
         3680,  // 3407 °C = 3680 K
-        new int[]{5, 4, 3, 2},
+        new byte[]{5, 4, 3, 2},
         -1.18,  // Standard-Elektrodenpotential (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -651,7 +651,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CHROMIUM = new ChemicalElement(
-        24,
+        (byte) 24,
         "Cr",
         Map.ofEntries(
             Map.entry("de", "Chrom"),
@@ -666,7 +666,7 @@ public class Elements {
         "[Ar] 3d^5 4s^1",
         2180,  // 1907 °C = 2180 K
         2944,  // 2671 °C = 2944 K
-        new int[]{6, 3, 2, 0},
+        new byte[]{6, 3, 2, 0},
         -0.74,  // Elektrodenpotential (Wert angegeben, keine Schätzung)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -679,7 +679,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MANGANESE = new ChemicalElement(
-        25,
+        (byte) 25,
         "Mn",
         Map.ofEntries(
             Map.entry("de", "Mangan"),
@@ -694,7 +694,7 @@ public class Elements {
         "[Ar] 3d^5 4s^2",
         1519,  // 1246 °C = 1519 K
         2334,  // 2061 °C = 2334 K
-        new int[]{7, 6, 4, 3, 2},
+        new byte[]{7, 6, 4, 3, 2},
         1.51,  // Elektrodenpotential (Wert angegeben)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -707,7 +707,7 @@ public class Elements {
     );
 
     private final static ChemicalElement IRON = new ChemicalElement(
-        26,
+        (byte) 26,
         "Fe",
         Map.ofEntries(
             Map.entry("de", "Eisen"),
@@ -722,7 +722,7 @@ public class Elements {
         "[Ar] 3d^6 4s^2",
         1811,  // 1538 °C = 1811 K
         3134,  // 2862 °C = 3134 K
-        new int[]{3, 2},
+        new byte[]{3, 2},
         -0.44,  // Elektrodenpotential (Wert angegeben)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -735,7 +735,7 @@ public class Elements {
     );
 
     private final static ChemicalElement COBALT = new ChemicalElement(
-        27,
+        (byte) 27,
         "Co",
         Map.ofEntries(
             Map.entry("de", "Cobalt"),
@@ -750,7 +750,7 @@ public class Elements {
         "[Ar] 3d^7 4s^2",
         1768,   // 1495 °C = 1768 K
         3200,   // 2927 °C = 3200 K (gerundeter Wert)
-        new int[]{3, 2},
+        new byte[]{3, 2},
         -0.28,   // Elektrodenpotential (in V, Standard)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -763,7 +763,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NICKEL = new ChemicalElement(
-        28,
+        (byte) 28,
         "Ni",
         Map.ofEntries(
             Map.entry("de", "Nickel"),
@@ -778,7 +778,7 @@ public class Elements {
         "[Ar] 3d^8 4s^2",
         1728,   // 1455 °C = 1728 K
         3003,   // 2730 °C = 3003 K
-        new int[]{2, 3},
+        new byte[]{2, 3},
         -0.25,   // Elektrodenpotential (in V, Standard)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -791,7 +791,7 @@ public class Elements {
     );
 
     private final static ChemicalElement COPPER = new ChemicalElement(
-        29,
+        (byte) 29,
         "Cu",
         Map.ofEntries(
             Map.entry("de", "Kupfer"),
@@ -806,7 +806,7 @@ public class Elements {
         "[Ar] 3d^10 4s^1",
         1358,   // 1085 °C = 1358 K
         2835,   // 2562 °C = 2835 K
-        new int[]{2, 1},
+        new byte[]{2, 1},
         0.34,   // Standard-Elektrodenpotential Cu^2+/Cu in V (statt 1.90, 1.90 war wohl Elektronegativität)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -819,7 +819,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ZINC = new ChemicalElement(
-        30,
+        (byte) 30,
         "Zn",
         Map.ofEntries(
             Map.entry("de", "Zink"),
@@ -834,7 +834,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2",
         692,    // 419 °C = 692 K
         1180,   // 907 °C = 1180 K
-        new int[]{2},
+        new byte[]{2},
         -0.76,  // Standard-Elektrodenpotential Zn^2+/Zn (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -847,7 +847,7 @@ public class Elements {
     );
 
     private final static ChemicalElement GALLIUM = new ChemicalElement(
-        31,
+        (byte) 31,
         "Ga",
         Map.ofEntries(
             Map.entry("de", "Gallium"),
@@ -862,7 +862,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^1",
         303,    // 30 °C = 303 K (geschätzt, da ca. 29,76 °C)
         2673,   // 2400 °C = 2673 K (gerundet)
-        new int[]{3},
+        new byte[]{3},
         0.53,   // Geschätztes Standard-Elektrodenpotential (kein exakter Wert)
         Map.ofEntries(
             Map.entry("de", "Metall"),
@@ -875,7 +875,7 @@ public class Elements {
     );
 
     private final static ChemicalElement GERMANIUM = new ChemicalElement(
-        32,
+        (byte) 32,
         "Ge",
         Map.ofEntries(
             Map.entry("de", "Germanium"),
@@ -890,7 +890,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^2",
         1211,   // 938 °C = 1211 K
         3106,   // 2833 °C = 3106 K
-        new int[]{4, 2},
+        new byte[]{4, 2},
         2.01,   // Geschätztes Standard-Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Halbmetall"),
@@ -903,7 +903,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ARSENIC = new ChemicalElement(
-        33,
+        (byte) 33,
         "As",
         Map.ofEntries(
             Map.entry("de", "Arsen"),
@@ -918,7 +918,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^3",
         1090,   // 817 °C = 1090 K (Schmelzpunkt)
         887,    // 614 °C = 887 K (Siedepunkt, arsen sublimiert oft, Wert geschätzt)
-        new int[]{-3, 3, 5},
+        new byte[]{-3, 3, 5},
         2.18,   // Geschätztes Standard-Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Halbmetall"),
@@ -931,7 +931,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SELENIUM = new ChemicalElement(
-        34,
+        (byte) 34,
         "Se",
         Map.ofEntries(
             Map.entry("de", "Selen"),
@@ -946,7 +946,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^4",
         494,    // 221 °C = 494 K
         958,    // 685 °C = 958 K
-        new int[]{-2, 2, 4, 6},
+        new byte[]{-2, 2, 4, 6},
         0.74,   // Geschätztes Standard-Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Nichtmetall"),
@@ -959,7 +959,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BROMINE = new ChemicalElement(
-        35,
+        (byte) 35,
         "Br",
         Map.ofEntries(
             Map.entry("de", "Brom"),
@@ -974,7 +974,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^5",
         266,    // -7 °C = 266 K (Schmelzpunkt)
         332,    // 59 °C = 332 K (Siedepunkt)
-        new int[]{-1, 1, 3, 5, 7},
+        new byte[]{-1, 1, 3, 5, 7},
         1.065,  // Standard-Elektrodenpotential (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -987,7 +987,7 @@ public class Elements {
     );
 
     private final static ChemicalElement KRYPTON = new ChemicalElement(
-        36,
+        (byte) 36,
         "Kr",
         Map.ofEntries(
             Map.entry("de", "Krypton"),
@@ -1002,7 +1002,7 @@ public class Elements {
         "[Ar] 3d^10 4s^2 4p^6",
         116,        // -157 °C = 116 K (Schmelzpunkt)
         120,        // -153 °C = 120 K (Siedepunkt)
-        new int[]{0, 2, 4, 6},
+        new byte[]{0, 2, 4, 6},
         Double.NaN,        // Elektrodenpotential (sehr negativ, Edelgas)
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -1015,7 +1015,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RUBIDIUM = new ChemicalElement(
-        37,
+        (byte) 37,
         "Rb",
         Map.ofEntries(
             Map.entry("de", "Rubidium"),
@@ -1030,7 +1030,7 @@ public class Elements {
         "[Kr] 5s^1",
         312,                // Schmelzpunkt in Kelvin (39 °C + 273)
         961,                // Siedepunkt in Kelvin (688 °C + 273)
-        new int[]{1},
+        new byte[]{1},
         -2.98,              // Standard-Elektrodenpotential (V)
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -1043,7 +1043,7 @@ public class Elements {
     );
 
     private final static ChemicalElement STRONTIUM = new ChemicalElement(
-        38,
+        (byte) 38,
         "Sr",
         Map.ofEntries(
             Map.entry("de", "Strontium"),
@@ -1058,7 +1058,7 @@ public class Elements {
         "[Kr] 5s^2",
         1050,               // Schmelzpunkt in Kelvin (777 °C + 273)
         1655,               // Siedepunkt in Kelvin (1382 °C + 273)
-        new int[]{2},
+        new byte[]{2},
         -2.89,              // Standard-Elektrodenpotential (V)
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -1071,7 +1071,7 @@ public class Elements {
     );
 
     private final static ChemicalElement YTTRIUM = new ChemicalElement(
-        39,
+        (byte) 39,
         "Y",
         Map.ofEntries(
             Map.entry("de", "Yttrium"),
@@ -1086,7 +1086,7 @@ public class Elements {
         "[Kr] 4d^1 5s^2",
         1799,               // Schmelzpunkt in Kelvin (1526 °C + 273)
         3618,               // Siedepunkt in Kelvin (3345 °C + 273)
-        new int[]{3},
+        new byte[]{3},
         -2.37,              // Standard-Elektrodenpotential (V)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1099,7 +1099,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ZIRCONIUM = new ChemicalElement(
-        40,
+        (byte) 40,
         "Zr",
         Map.ofEntries(
             Map.entry("de", "Zirkonium"),
@@ -1114,7 +1114,7 @@ public class Elements {
         "[Kr] 4d^2 5s^2",
         2128,                   // Schmelzpunkt in Kelvin (1855 °C + 273)
         4682,                   // Siedepunkt in Kelvin (4409 °C + 273)
-        new int[]{4},
+        new byte[]{4},
         -1.45,                  // Standard-Elektrodenpotential (V) (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1127,7 +1127,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NIOBIUM = new ChemicalElement(
-        41,
+        (byte) 41,
         "Nb",
         Map.ofEntries(
             Map.entry("de", "Niob"),
@@ -1142,7 +1142,7 @@ public class Elements {
         "[Kr] 4d^4 5s^1",
         2750,                   // Schmelzpunkt in Kelvin (2477 °C + 273)
         5017,                   // Siedepunkt in Kelvin (4744 °C + 273)
-        new int[]{5, 4, 3},
+        new byte[]{5, 4, 3},
         -1.1,                   // Standard-Elektrodenpotential (V) (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1155,7 +1155,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MOLYBDENUM = new ChemicalElement(
-        42,
+        (byte) 42,
         "Mo",
         Map.ofEntries(
             Map.entry("de", "Molybdän"),
@@ -1170,7 +1170,7 @@ public class Elements {
         "[Kr] 4d^5 5s^1",
         2896,                   // Schmelzpunkt in Kelvin (2623 °C + 273)
         4912,                   // Siedepunkt in Kelvin (4639 °C + 273)
-        new int[]{6, 4, 2},
+        new byte[]{6, 4, 2},
         0.15,                   // Standard-Elektrodenpotential (V)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1183,7 +1183,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TECHNETIUM = new ChemicalElement(
-        43,
+        (byte) 43,
         "Tc",
         Map.ofEntries(
             Map.entry("de", "Technetium"),
@@ -1198,7 +1198,7 @@ public class Elements {
         "[Kr] 4d^5 5s^2",
         2157,
         4265,
-        new int[]{7, 4},
+        new byte[]{7, 4},
         1.9,  // geschätzt
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1211,7 +1211,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RUTHENIUM = new ChemicalElement(
-        44,
+        (byte) 44,
         "Ru",
         Map.ofEntries(
             Map.entry("de", "Ruthenium"),
@@ -1226,7 +1226,7 @@ public class Elements {
         "[Kr] 4d^7 5s^1",
         2334,
         4150,
-        new int[]{8, 6, 4, 3, 2},
+        new byte[]{8, 6, 4, 3, 2},
         2.2,  // geschätzt
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1239,7 +1239,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RHODIUM = new ChemicalElement(
-        45,
+        (byte) 45,
         "Rh",
         Map.ofEntries(
             Map.entry("de", "Rhodium"),
@@ -1254,7 +1254,7 @@ public class Elements {
         "[Kr] 4d^8 5s^1",
         1964,
         3695,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN, 
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1267,7 +1267,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PALLADIUM = new ChemicalElement(
-        46,
+        (byte) 46,
         "Pd",
         Map.ofEntries(
             Map.entry("de", "Palladium"),
@@ -1282,7 +1282,7 @@ public class Elements {
         "[Kr] 4d^10",
         1554,
         2963,
-        new int[]{2, 4},
+        new byte[]{2, 4},
         Double.NaN,  
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1295,7 +1295,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SILVER = new ChemicalElement(
-        47,
+        (byte) 47,
         "Ag",
         Map.ofEntries(
             Map.entry("de", "Silber"),
@@ -1310,7 +1310,7 @@ public class Elements {
         "[Kr] 4d^10 5s^1",
         962,
         2162,
-        new int[]{1},
+        new byte[]{1},
         0.80,  // korrigiert: Standard-Elektrodenpotential für Silber ist ca. +0.80 V (nicht 1.93)
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -1323,7 +1323,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CADMIUM = new ChemicalElement(
-        48,
+        (byte) 48,
         "Cd",
         Map.ofEntries(
             Map.entry("de", "Cadmium"),
@@ -1338,7 +1338,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2",
         594,    // Schmelzpunkt in Kelvin (321 °C + 273)
         1040,   // Siedepunkt in Kelvin (767 °C + 273)
-        new int[]{2},
+        new byte[]{2},
         -0.40,  // Standard-Elektrodenpotential (V)
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -1351,7 +1351,7 @@ public class Elements {
     );
 
     private final static ChemicalElement INDIUM = new ChemicalElement(
-        49,
+        (byte) 49,
         "In",
         Map.ofEntries(
             Map.entry("de", "Indium"),
@@ -1366,7 +1366,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^1",
         429,    // korrigiert: Schmelzpunkt 429 K (nicht 157)
         2345,   // korrigiert: Siedepunkt 2345 K (nicht 2072)
-        new int[]{3},
+        new byte[]{3},
         0.34,  // geschätzt Standard-Elektrodenpotential ca. +0.34 V
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -1379,7 +1379,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TIN = new ChemicalElement(
-        50,
+        (byte) 50,
         "Sn",
         Map.ofEntries(
             Map.entry("de", "Zinn"),
@@ -1394,7 +1394,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^2",
         505,    // korrigiert: Schmelzpunkt 505 K (nicht 232)
         2875,   // korrigiert: Siedepunkt 2875 K (nicht 2602)
-        new int[]{4, 2},
+        new byte[]{4, 2},
         -0.14,  // Standard-Elektrodenpotential ca. -0.14 V (geschätzt)
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -1407,7 +1407,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ANTIMONY = new ChemicalElement(
-        51,
+        (byte) 51,
         "Sb",
         Map.ofEntries(
             Map.entry("de", "Antimon"),
@@ -1422,7 +1422,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^3",
         903,   // 630 °C → 903 K
         1860,  // 1587 °C → 1860 K
-        new int[]{-3, 3, 5},
+        new byte[]{-3, 3, 5},
         Double.NaN,  // geschätzt
         Map.ofEntries(
             Map.entry("de", "Halbmetall"),
@@ -1435,7 +1435,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TELLURIUM = new ChemicalElement(
-        52,
+        (byte) 52,
         "Te",
         Map.ofEntries(
             Map.entry("de", "Tellur"),
@@ -1450,7 +1450,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^4",
         722,   // 449 °C → 722 K
         1261,  // 988 °C → 1261 K
-        new int[]{-2, 2, 4, 6},
+        new byte[]{-2, 2, 4, 6},
         Double.NaN,  // Kein wissenschaftlich belegtes Standard-Elektrodenpotential vorhanden
         Map.ofEntries(
             Map.entry("de", "Halbmetall"),
@@ -1463,7 +1463,7 @@ public class Elements {
     );
 
     private final static ChemicalElement IODINE = new ChemicalElement(
-        53,
+        (byte) 53,
         "I",
         Map.ofEntries(
             Map.entry("de", "Iod"),
@@ -1478,7 +1478,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^5",
         387,   // 114 °C → 387 K
         457,   // 184 °C → 457 K
-        new int[]{-1, 1, 3, 5, 7},
+        new byte[]{-1, 1, 3, 5, 7},
         0.54,
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -1491,7 +1491,7 @@ public class Elements {
     );
 
     private final static ChemicalElement XENON = new ChemicalElement(
-        54,
+        (byte) 54,
         "Xe",
         Map.ofEntries(
             Map.entry("de", "Xenon"),
@@ -1506,7 +1506,7 @@ public class Elements {
         "[Kr] 4d^10 5s^2 5p^6",
         161,   // -112 °C → 161 K
         165,   // -108 °C → 165 K
-        new int[]{0, 2, 4, 6, 8},
+        new byte[]{0, 2, 4, 6, 8},
         Double.NaN,  // kein definiertes Standard-Elektrodenpotential, daher 0.0 ohne "geschätzt"
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -1519,7 +1519,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CESIUM = new ChemicalElement(
-        55,
+        (byte) 55,
         "Cs",
         Map.ofEntries(
             Map.entry("de", "Cäsium"),
@@ -1534,7 +1534,7 @@ public class Elements {
         "[Xe] 6s^1",
         301,   // 28 °C → 301 K
         944,   // 671 °C → 944 K
-        new int[]{1},
+        new byte[]{1},
         -2.92,
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -1547,7 +1547,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BARIUM = new ChemicalElement(
-        56,
+        (byte) 56,
         "Ba",
         Map.ofEntries(
             Map.entry("de", "Barium"),
@@ -1562,7 +1562,7 @@ public class Elements {
         "[Xe] 6s^2",
         1000,  // 727 °C → 1000 K
         2143,  // 1870 °C → 2143 K
-        new int[]{2},
+        new byte[]{2},
         -2.91,
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -1575,7 +1575,7 @@ public class Elements {
     );
 
     private final static ChemicalElement LANTHANUM = new ChemicalElement(
-        57,
+        (byte) 57,
         "La",
         Map.ofEntries(
             Map.entry("de", "Lanthan"),
@@ -1590,7 +1590,7 @@ public class Elements {
         "[Xe] 5d^1 6s^2",
         1193,  // 920 °C → 1193 K
         3737,  // 3464 °C → 3737 K
-        new int[]{3},
+        new byte[]{3},
         -2.52,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1603,7 +1603,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CERIUM = new ChemicalElement(
-        58,
+        (byte) 58,
         "Ce",
         Map.ofEntries(
             Map.entry("de", "Cer"),
@@ -1618,7 +1618,7 @@ public class Elements {
         "[Xe] 4f^1 5d^1 6s^2",
         1068,
         3716,
-        new int[]{3, 4},
+        new byte[]{3, 4},
         -2.34,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1632,7 +1632,7 @@ public class Elements {
 
 
     private final static ChemicalElement PRASEODYMIUM = new ChemicalElement(
-        59,
+        (byte) 59,
         "Pr",
         Map.ofEntries(
             Map.entry("en", "Praseodymium"),
@@ -1647,7 +1647,7 @@ public class Elements {
         "[Xe] 4f^3 6s^2",
         1204,  // 931 °C → 1204 K
         3793,  // 3520 °C → 3793 K
-        new int[]{3},
+        new byte[]{3},
         -2.35,
         Map.ofEntries(
             Map.entry("en", "Lanthanide"),
@@ -1660,7 +1660,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NEODYMIUM = new ChemicalElement(
-        60,
+        (byte) 60,
         "Nd",
         Map.ofEntries(
             Map.entry("en", "Neodymium"),
@@ -1675,7 +1675,7 @@ public class Elements {
         "[Xe] 4f^4 6s^2",
         1294,  // 1021 °C → 1294 K
         3373,  // 3100 °C → 3373 K
-        new int[]{3},
+        new byte[]{3},
         -2.32,
         Map.ofEntries(
             Map.entry("en", "Lanthanide"),
@@ -1688,7 +1688,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PROMETHIUM = new ChemicalElement(
-        61,
+        (byte) 61,
         "Pm",
         Map.ofEntries(
             Map.entry("de", "Promethium"),
@@ -1703,7 +1703,7 @@ public class Elements {
         "[Xe] 4f^5 6s^2",
         1315,  // 1042 °C → 1315 K
         3273,  // 3000 °C → 3273 K
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,  // Kein wissenschaftlich anerkannter Wert für Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1716,7 +1716,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SAMARIUM = new ChemicalElement(
-        62,
+        (byte) 62,
         "Sm",
         Map.ofEntries(
             Map.entry("de", "Samarium"),
@@ -1731,7 +1731,7 @@ public class Elements {
         "[Xe] 4f^6 6s^2",
         1345,   // Schmelzpunkt in Kelvin
         2067,   // Siedepunkt in Kelvin
-        new int[]{2, 3}, // übliche Oxidationszahlen
+        new byte[]{2, 3}, // übliche Oxidationszahlen
         Double.NaN,      // Standard-Elektrodenpotential (hier meist nicht bekannt)
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1744,7 +1744,7 @@ public class Elements {
     );
 
     private final static ChemicalElement EUROPIUM = new ChemicalElement(
-        63,
+        (byte) 63,
         "Eu",
         Map.ofEntries(
             Map.entry("de", "Europium"),
@@ -1759,7 +1759,7 @@ public class Elements {
         "[Xe] 4f^7 6s^2",
         1095,  // 822 °C → 1095 K
         1802,  // 1529 °C → 1802 K
-        new int[]{2, 3},
+        new byte[]{2, 3},
         -2.38,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1772,7 +1772,7 @@ public class Elements {
     );
 
     private final static ChemicalElement GADOLINIUM = new ChemicalElement(
-        64,
+        (byte) 64,
         "Gd",
         Map.ofEntries(
             Map.entry("de", "Gadolinium"),
@@ -1787,7 +1787,7 @@ public class Elements {
         "[Xe] 4f^7 5d^1 6s^2",
         1585,  // 1312 °C → 1585 K
         3523,  // 3250 °C → 3523 K
-        new int[]{3},
+        new byte[]{3},
         -2.28,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1800,7 +1800,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TERBIUM = new ChemicalElement(
-        65,
+        (byte) 65,
         "Tb",
         Map.ofEntries(
             Map.entry("de", "Terbium"),
@@ -1815,7 +1815,7 @@ public class Elements {
         "[Xe] 4f^9 6s^2",
         1629,  // 1356 °C → 1629 K
         3503,  // 3230 °C → 3503 K
-        new int[]{3},
+        new byte[]{3},
         -2.30,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1828,7 +1828,7 @@ public class Elements {
     );
 
     private final static ChemicalElement DYSPROSIUM = new ChemicalElement(
-        66,
+        (byte) 66,
         "Dy",
         Map.ofEntries(
             Map.entry("de", "Dysprosium"),
@@ -1843,7 +1843,7 @@ public class Elements {
         "[Xe] 4f^10 6s^2",
         1685,  // 1412 °C → 1685 K
         2840,  // 2567 °C → 2840 K
-        new int[]{3},
+        new byte[]{3},
         -2.29,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1856,7 +1856,7 @@ public class Elements {
     );
 
     private final static ChemicalElement HOLMIUM = new ChemicalElement(
-        67,
+        (byte) 67,
         "Ho",
         Map.ofEntries(
             Map.entry("de", "Holmium"),
@@ -1871,7 +1871,7 @@ public class Elements {
         "[Xe] 4f^11 6s^2",
         1747,  // 1474 °C → 1747 K
         2973,  // 2700 °C → 2973 K
-        new int[]{3},
+        new byte[]{3},
         -2.33,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1884,7 +1884,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ERBIUM = new ChemicalElement(
-        68,
+        (byte) 68,
         "Er",
         Map.ofEntries(
             Map.entry("de", "Erbium"),
@@ -1899,7 +1899,7 @@ public class Elements {
         "[Xe] 4f^12 6s^2",
         1802,  // 1529 °C → 1802 K
         3141,  // 2868 °C → 3141 K
-        new int[]{3},
+        new byte[]{3},
         -2.33,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1912,7 +1912,7 @@ public class Elements {
     );
 
     private final static ChemicalElement THULIUM = new ChemicalElement(
-        69,
+        (byte) 69,
         "Tm",
         Map.ofEntries(
             Map.entry("de", "Thulium"),
@@ -1927,7 +1927,7 @@ public class Elements {
         "[Xe] 4f^13 6s^2",
         1818,  // 1545 °C → 1818 K
         2223,  // 1950 °C → 2223 K
-        new int[]{3},
+        new byte[]{3},
         -2.31,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1940,7 +1940,7 @@ public class Elements {
     );
 
     private final static ChemicalElement YTTERBIUM = new ChemicalElement(
-        70,
+        (byte) 70,
         "Yb",
         Map.ofEntries(
             Map.entry("de", "Ytterbium"),
@@ -1955,7 +1955,7 @@ public class Elements {
         "[Xe] 4f^14 6s^2",
         1097,  // 824 °C → 1097 K
         1469,  // 1196 °C → 1469 K
-        new int[]{2, 3},
+        new byte[]{2, 3},
         -2.20,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1968,7 +1968,7 @@ public class Elements {
     );
 
     private final static ChemicalElement LUTETIUM = new ChemicalElement(
-        71,
+        (byte) 71,
         "Lu",
         Map.ofEntries(
             Map.entry("de", "Lutetium"),
@@ -1983,7 +1983,7 @@ public class Elements {
         "[Xe] 4f^14 5d^1 6s^2",
         1936,  // 1663 °C → 1936 K
         3675,  // 3402 °C → 3675 K
-        new int[]{3},
+        new byte[]{3},
         -2.25,
         Map.ofEntries(
             Map.entry("de", "Lanthanoid"),
@@ -1996,7 +1996,7 @@ public class Elements {
     );
 
     private final static ChemicalElement HAFNIUM = new ChemicalElement(
-        72,
+        (byte) 72,
         "Hf",
         Map.ofEntries(
             Map.entry("de", "Hafnium"),
@@ -2011,7 +2011,7 @@ public class Elements {
         "[Xe] 4f^14 5d^2 6s^2",
         2506,  // 2233 °C → 2506 K
         4876,  // 4603 °C → 4876 K
-        new int[]{4},
+        new byte[]{4},
         -1.70,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2024,7 +2024,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TANTALUM = new ChemicalElement(
-        73,
+        (byte) 73,
         "Ta",
         Map.ofEntries(
             Map.entry("de", "Tantal"),
@@ -2039,7 +2039,7 @@ public class Elements {
         "[Xe] 4f^14 5d^3 6s^2",
         3290,  // 3017 °C → 3290 K
         5731,  // 5458 °C → 5731 K
-        new int[]{5},
+        new byte[]{5},
         -0.12,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2052,7 +2052,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TUNGSTEN = new ChemicalElement(
-        74,
+        (byte) 74,
         "W",
         Map.ofEntries(
             Map.entry("de", "Wolfram"),
@@ -2067,7 +2067,7 @@ public class Elements {
         "[Xe] 4f^14 5d^4 6s^2",
         3695,  // 3422 °C → 3695 K
         5828,  // 5555 °C → 5828 K
-        new int[]{6, 5, 4, 3, 2},
+        new byte[]{6, 5, 4, 3, 2},
         0.12,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2080,7 +2080,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RHENIUM = new ChemicalElement(
-        75,
+        (byte) 75,
         "Re",
         Map.ofEntries(
             Map.entry("de", "Rhenium"),
@@ -2095,7 +2095,7 @@ public class Elements {
         "[Xe] 4f^14 5d^5 6s^2",
         3459,  // 3186 °C → 3459 K
         5870,  // 5596 °C → 5870 K
-        new int[]{7, 6, 4, 2},
+        new byte[]{7, 6, 4, 2},
         0.37,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2108,7 +2108,7 @@ public class Elements {
     );
 
     private final static ChemicalElement OSMIUM = new ChemicalElement(
-        76,
+        (byte) 76,
         "Os",
         Map.ofEntries(
             Map.entry("de", "Osmium"),
@@ -2123,7 +2123,7 @@ public class Elements {
         "[Xe] 4f^14 5d^6 6s^2",
         3306,  // 3033 °C → 3306 K
         5285,  // 5012 °C → 5285 K
-        new int[]{8, 6, 4, 3, 2},
+        new byte[]{8, 6, 4, 3, 2},
         0.40,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2136,7 +2136,7 @@ public class Elements {
     );
 
     private final static ChemicalElement IRIDIUM = new ChemicalElement(
-        77,
+        (byte) 77,
         "Ir",
         Map.ofEntries(
             Map.entry("de", "Iridium"),
@@ -2151,7 +2151,7 @@ public class Elements {
         "[Xe] 4f^14 5d^7 6s^2",
         2739,  // 2466 °C → 2739 K
         4701,  // 4428 °C → 4701 K
-        new int[]{6, 4, 3},
+        new byte[]{6, 4, 3},
         0.56,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2164,7 +2164,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PLATINUM = new ChemicalElement(
-        78,
+        (byte) 78,
         "Pt",
         Map.ofEntries(
             Map.entry("de", "Platin"),
@@ -2179,7 +2179,7 @@ public class Elements {
         "[Xe] 4f^14 5d^9 6s^1",
         2041,  // 1768 °C → 2041 K
         4098,  // 3825 °C → 4098 K
-        new int[]{4, 2},
+        new byte[]{4, 2},
         1.18,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2192,7 +2192,7 @@ public class Elements {
     );
 
     private final static ChemicalElement GOLD = new ChemicalElement(
-        79,
+        (byte) 79,
         "Au",
         Map.ofEntries(
             Map.entry("de", "Gold"),
@@ -2207,7 +2207,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^1",
         1337,  // 1064 °C → 1337 K
         3132,  // 2856 °C → 3132 K
-        new int[]{3, 1},
+        new byte[]{3, 1},
         1.50,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2220,7 +2220,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MERCURY = new ChemicalElement(
-        80,
+        (byte) 80,
         "Hg",
         Map.ofEntries(
             Map.entry("de", "Quecksilber"),
@@ -2235,7 +2235,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2",
         234,   // -39 °C → 234 K
         630,   // 357 °C → 630 K
-        new int[]{2, 1},
+        new byte[]{2, 1},
         0.85,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2248,7 +2248,7 @@ public class Elements {
     );
 
     private final static ChemicalElement THALLIUM = new ChemicalElement(
-        81,
+        (byte) 81,
         "Tl",
         Map.ofEntries(
             Map.entry("de", "Thallium"),
@@ -2263,7 +2263,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^1",
         577,   // 304 °C → 577 K
         1746,  // 1473 °C → 1746 K
-        new int[]{3, 1},
+        new byte[]{3, 1},
         0.73,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -2276,7 +2276,7 @@ public class Elements {
     );
 
     private final static ChemicalElement LEAD = new ChemicalElement(
-        82,
+        (byte) 82,
         "Pb",
         Map.ofEntries(
             Map.entry("de", "Blei"),
@@ -2291,7 +2291,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^2",
         600,    // 327 °C → 600 K
         2022,   // 1749 °C → 2022 K
-        new int[]{4, 2},
+        new byte[]{4, 2},
         -0.13,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -2304,7 +2304,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BISMUTH = new ChemicalElement(
-        83,
+        (byte) 83,
         "Bi",
         Map.ofEntries(
             Map.entry("de", "Wismut"),
@@ -2319,7 +2319,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^3",
         544,    // 271 °C → 544 K
         1837,   // 1564 °C → 1837 K
-        new int[]{5, 3},
+        new byte[]{5, 3},
         0.32,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -2332,7 +2332,7 @@ public class Elements {
     );
 
     private final static ChemicalElement POLONIUM = new ChemicalElement(
-        84,
+        (byte) 84,
         "Po",
         Map.ofEntries(
             Map.entry("de", "Polonium"),
@@ -2347,7 +2347,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^4",
         527,    // 254 °C → 527 K
         1235,   // 962 °C → 1235 K
-        new int[]{6, 4, 2},
+        new byte[]{6, 4, 2},
         0.89,
         Map.ofEntries(
             Map.entry("de", "Halbmetall"),  // Korrektur hier
@@ -2360,7 +2360,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ASTATINE = new ChemicalElement(
-        85,
+        (byte) 85,
         "At",
         Map.ofEntries(
             Map.entry("de", "Astat"),
@@ -2375,7 +2375,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^5",
         575,    // 302 °C → 575 K
         610,    // 337 °C → 610 K
-        new int[]{-1, 1, 3, 5, 7},
+        new byte[]{-1, 1, 3, 5, 7},
         0.27,
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -2388,7 +2388,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RADON = new ChemicalElement(
-        86,
+        (byte) 86,
         "Rn",
         Map.ofEntries(
             Map.entry("de", "Radon"),
@@ -2403,7 +2403,7 @@ public class Elements {
         "[Xe] 4f^14 5d^10 6s^2 6p^6",
         202, // -71 °C → 202 K
         211, // -62 °C → 211 K
-        new int[]{0}, // Oxidationszahl für Edelgas meist 0
+        new byte[]{0}, // Oxidationszahl für Edelgas meist 0
         Double.NaN, // Kein Standardelektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -2416,7 +2416,7 @@ public class Elements {
     );
 
     private final static ChemicalElement FRANCIUM = new ChemicalElement(
-        87,
+        (byte) 87,
         "Fr",
         Map.ofEntries(
             Map.entry("de", "Francium"),
@@ -2431,7 +2431,7 @@ public class Elements {
         "[Rn] 7s^1",
         300,  // 27 °C → 300 K
         950,  // 677 °C → 950 K
-        new int[]{1},
+        new byte[]{1},
         Double.NaN, // kein verlässliches Elektrodenpotential
         Map.ofEntries(
             Map.entry("de", "Alkalimetall"),
@@ -2444,7 +2444,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RADIUM = new ChemicalElement(
-        88,
+        (byte) 88,
         "Ra",
         Map.ofEntries(
             Map.entry("de", "Radium"),
@@ -2459,7 +2459,7 @@ public class Elements {
         "[Rn] 7s^2",
         973,  // 700 °C → 973 K
         2010, // 1737 °C → 2010 K
-        new int[]{2},
+        new byte[]{2},
         Double.NaN,  // kein gesicherter Wert
         Map.ofEntries(
             Map.entry("de", "Erdalkalimetall"),
@@ -2472,7 +2472,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ACTINIUM = new ChemicalElement(
-        89,
+        (byte) 89,
         "Ac",
         Map.ofEntries(
             Map.entry("de", "Actinium"),
@@ -2487,7 +2487,7 @@ public class Elements {
         "[Rn] 6d^1 7s^2",
         1323, // 1050 °C → 1323 K
         3573, // 3200 °C → 3573 K
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2500,7 +2500,7 @@ public class Elements {
 );
 
     private final static ChemicalElement THORIUM = new ChemicalElement(
-        90,
+        (byte) 90,
         "Th",
         Map.ofEntries(
             Map.entry("de", "Thorium"),
@@ -2515,7 +2515,7 @@ public class Elements {
         "[Rn] 6d^2 7s^2",
         2023, // 1750 °C → 2023 K
         5050, // 4788 °C → 5050 K
-        new int[]{4},
+        new byte[]{4},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2528,7 +2528,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PROTACTINIUM = new ChemicalElement(
-        91,
+        (byte) 91,
         "Pa",
         Map.ofEntries(
             Map.entry("de", "Protactinium"),
@@ -2543,7 +2543,7 @@ public class Elements {
         "[Rn] 5f^2 6d^1 7s^2",
         1845, // 1572 °C → 1845 K
         4273, // 4000 °C → 4273 K
-        new int[]{5, 4},
+        new byte[]{5, 4},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2556,7 +2556,7 @@ public class Elements {
     );
 
     private final static ChemicalElement URANIUM = new ChemicalElement(
-        92,
+        (byte) 92,
         "U",
         Map.ofEntries(
             Map.entry("de", "Uran"),
@@ -2571,7 +2571,7 @@ public class Elements {
         "[Rn] 5f^3 6d^1 7s^2",
         1408, // Schmelzpunkt in K (1135 °C)
         4404, // Siedepunkt in K (4131 °C)
-        new int[]{6, 5, 4, 3},
+        new byte[]{6, 5, 4, 3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2584,7 +2584,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NEPTUNIUM = new ChemicalElement(
-        93,
+        (byte) 93,
         "Np",
         Map.ofEntries(
             Map.entry("de", "Neptunium"),
@@ -2599,7 +2599,7 @@ public class Elements {
         "[Rn] 5f^4 6d^1 7s^2",
         917,  // 644 °C
         4273, // 4000 °C
-        new int[]{6, 5, 4, 3},
+        new byte[]{6, 5, 4, 3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2612,7 +2612,7 @@ public class Elements {
     );
 
     private final static ChemicalElement PLUTONIUM = new ChemicalElement(
-        94,
+        (byte) 94,
         "Pu",
         Map.ofEntries(
             Map.entry("de", "Plutonium"),
@@ -2627,7 +2627,7 @@ public class Elements {
         "[Rn] 5f^6 7s^2",
         913,                   // 640 °C in K = 913 K
         3501,                  // 3228 °C in K = 3501 K
-        new int[]{6, 5, 4, 3},
+        new byte[]{6, 5, 4, 3},
         Double.NaN,            // Elektrochemisches Potential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2640,7 +2640,7 @@ public class Elements {
     );
 
     private final static ChemicalElement AMERICIUM = new ChemicalElement(
-        95,
+        (byte) 95,
         "Am",
         Map.ofEntries(
             Map.entry("de", "Americium"),
@@ -2655,7 +2655,7 @@ public class Elements {
         "[Rn] 5f^7 7s^2",
         1449,                  // 1176 °C = 1449 K
         2880,                  // 2607 °C = 2880 K
-        new int[]{6, 5, 4, 3},
+        new byte[]{6, 5, 4, 3},
         Double.NaN,            // Elektrochemisches Potential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2668,7 +2668,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CURIUM = new ChemicalElement(
-        96,
+        (byte) 96,
         "Cm",
         Map.ofEntries(
             Map.entry("de", "Curium"),
@@ -2683,7 +2683,7 @@ public class Elements {
         "[Rn] 5f^7 6d^1 7s^2",
         1613,                  // 1340 °C = 1613 K
         3383,                  // 3110 °C = 3383 K
-        new int[]{6, 5, 4, 3},
+        new byte[]{6, 5, 4, 3},
         Double.NaN,            // Elektrochemisches Potential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2696,7 +2696,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BERKELIUM = new ChemicalElement(
-        97,
+        (byte) 97,
         "Bk",
         Map.ofEntries(
             Map.entry("de", "Berkelium"),
@@ -2711,7 +2711,7 @@ public class Elements {
         "[Rn] 5f^9 7s^2",
         1259,                  // 986 °C = 1259 K
         2900,                  // ca. 2627 °C = 2900 K
-        new int[]{4, 3},
+        new byte[]{4, 3},
         Double.NaN,            // Elektrochemisches Potential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2724,7 +2724,7 @@ public class Elements {
     );
 
     private final static ChemicalElement CALIFORNIUM = new ChemicalElement(
-        98,
+        (byte) 98,
         "Cf",
         Map.ofEntries(
             Map.entry("de", "Californium"),
@@ -2739,7 +2739,7 @@ public class Elements {
         "[Rn] 5f^10 7s^2",
         Integer.MIN_VALUE, // Schmelzpunkt unbekannt
         Integer.MIN_VALUE, // Siedepunkt unbekannt
-        new int[]{4, 3},
+        new byte[]{4, 3},
         Double.NaN, // Elektrodenpotential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2752,7 +2752,7 @@ public class Elements {
     );
 
     private final static ChemicalElement EINSTEINIUM = new ChemicalElement(
-        99,
+        (byte) 99,
         "Es",
         Map.ofEntries(
             Map.entry("de", "Einsteinium"),
@@ -2767,7 +2767,7 @@ public class Elements {
         "[Rn] 5f^11 7s^2",
         Integer.MIN_VALUE,
         Integer.MIN_VALUE,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2780,7 +2780,7 @@ public class Elements {
     );
 
     private final static ChemicalElement FERMIUM = new ChemicalElement(
-        100,
+        (byte) 100,
         "Fm",
         Map.ofEntries(
             Map.entry("de", "Fermium"),
@@ -2795,7 +2795,7 @@ public class Elements {
         "[Rn] 5f^12 7s^2",
         Integer.MIN_VALUE,
         Integer.MIN_VALUE,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2808,7 +2808,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MANDELEVIUM = new ChemicalElement(
-        101,
+        (byte) 101,
         "Md",
         Map.ofEntries(
             Map.entry("de", "Mendelevium"),
@@ -2823,7 +2823,7 @@ public class Elements {
         "[Rn] 5f^13 7s^2",
         Integer.MIN_VALUE,
         Integer.MIN_VALUE,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2836,7 +2836,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NOBELIUM = new ChemicalElement(
-        102,
+        (byte) 102,
         "No",
         Map.ofEntries(
             Map.entry("de", "Nobelium"),
@@ -2851,7 +2851,7 @@ public class Elements {
         "[Rn] 5f^14 7s^2",
         827,                 // Schmelzpunkt in K (554 °C)
         Integer.MIN_VALUE,    // Siedepunkt unbekannt
-        new int[]{2, 3},
+        new byte[]{2, 3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2864,7 +2864,7 @@ public class Elements {
     );
 
     private final static ChemicalElement LAWRENCIUM = new ChemicalElement(
-        103,
+        (byte) 103,
         "Lr",
         Map.ofEntries(
             Map.entry("de", "Lawrencium"),
@@ -2879,7 +2879,7 @@ public class Elements {
         "[Rn] 5f^14 6d^1 7s^2",
         1627,
         3327,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN, // Elektrodenpotential unbekannt
         Map.ofEntries(
             Map.entry("de", "Actinoid"),
@@ -2892,7 +2892,7 @@ public class Elements {
     );
 
     private final static ChemicalElement RUTHERFORDIUM = new ChemicalElement(
-        104,
+        (byte) 104,
         "Rf",
         Map.ofEntries(
             Map.entry("de", "Rutherfordium"),
@@ -2907,7 +2907,7 @@ public class Elements {
         "[Rn] 5f^14 6d^2 7s^2",
         2410,
         5800,
-        new int[]{4},
+        new byte[]{4},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2920,7 +2920,7 @@ public class Elements {
     );
 
     private final static ChemicalElement DUBNIUM = new ChemicalElement(
-        105,
+        (byte) 105,
         "Db",
         Map.ofEntries(
             Map.entry("de", "Dubnium"),
@@ -2935,7 +2935,7 @@ public class Elements {
         "[Rn] 5f^14 6d^3 7s^2",
         2830,
         5850,
-        new int[]{5},
+        new byte[]{5},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2948,7 +2948,7 @@ public class Elements {
     );
 
     private final static ChemicalElement SEABORGIUM = new ChemicalElement(
-        106,
+        (byte) 106,
         "Sg",
         Map.ofEntries(
             Map.entry("de", "Seaborgium"),
@@ -2963,7 +2963,7 @@ public class Elements {
         "[Rn] 5f^14 6d^4 7s^2",
         2900,
         5860,
-        new int[]{6},
+        new byte[]{6},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -2976,7 +2976,7 @@ public class Elements {
     );
 
     private final static ChemicalElement BOHRIUM = new ChemicalElement(
-        107,
+        (byte) 107,
         "Bh",
         Map.ofEntries(
             Map.entry("de", "Bohrium"),
@@ -2991,7 +2991,7 @@ public class Elements {
         "[Rn] 5f^14 6d^5 7s^2",
         2800,
         5780,
-        new int[]{7},
+        new byte[]{7},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3004,7 +3004,7 @@ public class Elements {
     );
 
     private final static ChemicalElement HASSIUM = new ChemicalElement(
-        108,
+        (byte) 108,
         "Hs",
         Map.ofEntries(
             Map.entry("de", "Hassium"),
@@ -3019,7 +3019,7 @@ public class Elements {
         "[Rn] 5f^14 6d^6 7s^2",
         2870,
         5800,
-        new int[]{8},
+        new byte[]{8},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3032,7 +3032,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MEITNERIUM = new ChemicalElement(
-        109,
+        (byte) 109,
         "Mt",
         Map.ofEntries(
             Map.entry("de", "Meitnerium"),
@@ -3047,7 +3047,7 @@ public class Elements {
         "[Rn] 5f^14 6d^7 7s^2",
         2900,
         5700,
-        new int[]{},  // keine gesicherten Oxidationszahlen
+        new byte[]{},  // keine gesicherten Oxidationszahlen
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3060,7 +3060,7 @@ public class Elements {
     );
 
     private final static ChemicalElement DARMSTADTIUM = new ChemicalElement(
-        110,
+        (byte) 110,
         "Ds",
         Map.ofEntries(
             Map.entry("de", "Darmstadtium"),
@@ -3075,7 +3075,7 @@ public class Elements {
         "[Rn] 5f^14 6d^8 7s^2",
         2800,
         5700,
-        new int[]{},  // keine gesicherten Oxidationszahlen
+        new byte[]{},  // keine gesicherten Oxidationszahlen
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3088,7 +3088,7 @@ public class Elements {
     );
 
     private final static ChemicalElement ROENTGENIUM = new ChemicalElement(
-        111,
+        (byte) 111,
         "Rg",
         Map.ofEntries(
             Map.entry("de", "Roentgenium"),
@@ -3103,7 +3103,7 @@ public class Elements {
         "[Rn] 5f^14 6d^9 7s^2",
         2800,
         5700,
-        new int[]{},  // keine gesicherten Oxidationszahlen
+        new byte[]{},  // keine gesicherten Oxidationszahlen
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3116,7 +3116,7 @@ public class Elements {
     );
 
     private final static ChemicalElement COPERNICUM = new ChemicalElement(
-        112,
+        (byte) 112,
         "Cn",
         Map.ofEntries(
             Map.entry("de", "Copernicium"),
@@ -3131,7 +3131,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2",
         2830,
         5770,
-        new int[]{2},  // +2 am wahrscheinlichsten
+        new byte[]{2},  // +2 am wahrscheinlichsten
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Übergangsmetall"),
@@ -3144,7 +3144,7 @@ public class Elements {
     );
 
     private final static ChemicalElement NIHONIUM = new ChemicalElement(
-        113,
+        (byte) 113,
         "Nh",
         Map.ofEntries(
             Map.entry("de", "Nihonium"),
@@ -3159,7 +3159,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^1",
         2700,
         4600,
-        new int[]{3},
+        new byte[]{3},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -3172,7 +3172,7 @@ public class Elements {
     );
 
     private final static ChemicalElement FLEROVIUM = new ChemicalElement(
-        114,
+        (byte) 114,
         "Fl",
         Map.ofEntries(
             Map.entry("de", "Flerovium"),
@@ -3187,7 +3187,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^2",
         2000,
         4000,
-        new int[]{2, 4},
+        new byte[]{2, 4},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -3200,7 +3200,7 @@ public class Elements {
     );
 
     private final static ChemicalElement MOSCOVIUM = new ChemicalElement(
-        115,
+        (byte) 115,
         "Mc",
         Map.ofEntries(
             Map.entry("de", "Moscovium"),
@@ -3215,7 +3215,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^3",
         1500,
         3000,
-        new int[]{},
+        new byte[]{},
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Post-Übergangsmetall"),
@@ -3228,7 +3228,7 @@ public class Elements {
     );
     
     private final static ChemicalElement LIVERMORIUM = new ChemicalElement(
-        116,
+        (byte) 116,
         "Lv",
         Map.ofEntries(
             Map.entry("de", "Livermorium"),
@@ -3243,7 +3243,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^4",
         1300,
         2800,
-        new int[]{},  // +2 ist vermutet
+        new byte[]{},  // +2 ist vermutet
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Metall"),
@@ -3256,7 +3256,7 @@ public class Elements {
     );
 
     private final static ChemicalElement TENNESSINE = new ChemicalElement(
-        117,
+        (byte) 117,
         "Ts",
         Map.ofEntries(
             Map.entry("de", "Tennessin"),
@@ -3271,7 +3271,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^5",
         1200,
         2500,
-        new int[]{}, // Halogen-ähnliche Oxidationszahlen (theoretisch)
+        new byte[]{}, // Halogen-ähnliche Oxidationszahlen (theoretisch)
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Halogen"),
@@ -3284,7 +3284,7 @@ public class Elements {
     );
 
     private final static ChemicalElement OGANESSON = new ChemicalElement(
-        118,
+        (byte) 118,
         "Og",
         Map.ofEntries(
             Map.entry("de", "Oganesson"),
@@ -3299,7 +3299,7 @@ public class Elements {
         "[Rn] 5f^14 6d^10 7s^2 7p^6",
         123,
         350,
-        new int[]{}, // Oxidationszahlen unbekannt, sehr instabil
+        new byte[]{}, // Oxidationszahlen unbekannt, sehr instabil
         Double.NaN,
         Map.ofEntries(
             Map.entry("de", "Edelgas"),
@@ -3327,15 +3327,15 @@ public class Elements {
     private Elements(){
     }
 
-    public static ChemicalElement getElement(String nameENG) {
+    public static ChemicalElement getElement(String name) {
         for (ChemicalElement chemicalElement : LIST_OF_ELEMENTS) {
-            if (nameENG.equals(chemicalElement.getNames().get("de"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getNames().get("en"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getNames().get("fr"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getNames().get("zh"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getNames().get("ru"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getNames().get("jp"))) { return chemicalElement; }
-            if (nameENG.equals(chemicalElement.getSymbol())) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("de"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("en"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("fr"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("zh"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("ru"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getNames().get("jp"))) { return chemicalElement; }
+            if (name.equals(chemicalElement.getSymbol())) { return chemicalElement; }
         }
         
         return null;

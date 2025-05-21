@@ -3,7 +3,7 @@ package main.data;
 import java.util.Map;
 
 public class ChemicalElement {
-    private final int atomicNumber;
+    private final byte atomicNumber;
     private final String symbol;
     private final Map<String, String> names;
     private final double atomicWeight;
@@ -11,12 +11,12 @@ public class ChemicalElement {
     private final String electronConfig;
     private final int meltingPoint;
     private final int boilingPoint;
-    private final int[] oxidationNums;
+    private final byte[] oxidationNums;
     private final double standardElectrodePotential;
     private final Map<String, String> group;
 
     public ChemicalElement(
-        int atomicNumber, 
+        byte atomicNumber, 
         String symbol,
         Map<String, String> names,
         double atomicWeight,
@@ -24,7 +24,7 @@ public class ChemicalElement {
         String electronConfig,
         int meltingPoint,
         int boilingPoint,
-        int[] oxidationNums,
+        byte[] oxidationNums,
         double standardElectrodePotential,
         Map<String, String> group
         ) {
@@ -41,7 +41,7 @@ public class ChemicalElement {
         this.group = group;
     }
 
-    public int getAtomicNumber(){
+    public byte getAtomicNumber(){
         return this.atomicNumber;
     }
 
@@ -73,7 +73,7 @@ public class ChemicalElement {
         return this.boilingPoint;
     }
 
-    public int[] getOxidationNumbers(){
+    public byte[] getOxidationNumbers(){
         return this.oxidationNums;
     }
 
