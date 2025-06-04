@@ -114,8 +114,8 @@ public class ElementWindow extends JFrame implements FixElementWindow {
         labelComp.setForeground(Color.BLACK);
         valueComp.setForeground(Color.BLACK);
 
-        labelComp.setFont(loadFontFromFile("res/fonts/FiraCode-Medium.ttf", 12));
-        valueComp.setFont(loadFontFromFile("res/fonts/FiraCode-Medium.ttf", 12));
+        labelComp.setFont(loadFontFromFile("res/fonts/FiraCode/FiraCode-Medium.ttf", 12));
+        valueComp.setFont(loadFontFromFile("res/fonts/FiraCode/FiraCode-Medium.ttf", 12));
 
         panel.add(labelComp);
         panel.add(valueComp);
