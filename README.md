@@ -86,7 +86,7 @@ for example by offering a “Source” link in the user interface (see section 1
 
 ## Status
 
-**Development** – Core functionality implemented. Learning mode is planned.
+**Development** – Core functionality implemented. Learning mode is planned. Menu Experimental.
 
 ## Contact
 
