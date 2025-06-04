@@ -77,9 +77,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 Contact:
 Github: https://github.com/jimfeserHTW
+If this program interacts with users remotely through a computer network,
+it must provide a way for users to get its source code,
+for example by offering a “Source” link in the user interface (see section 13 of the AGPL).
 ```
 
-If this program interacts with users remotely through a computer network, it must provide a way for users to get its source code, for example by offering a “Source” link in the user interface (see section 13 of the AGPL).
 
 ## 🧪 Status
 
