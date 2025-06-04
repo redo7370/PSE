@@ -9,6 +9,13 @@ import java.util.Map;
  */
 
 public class ChemicalElement {
+
+    /**
+     * Represents a chemical element with its properties.
+     * Each element has an atomic number, symbol, names in different languages,
+     * atomic weight, electronegativity, electron configuration, melting and boiling points,
+     * oxidation numbers, standard electrode potential, and group information.
+     */
     private final byte atomicNumber;
     private final String symbol;
     private final Map<String, String> names;

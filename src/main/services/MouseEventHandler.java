@@ -26,6 +26,10 @@ import main.App;
  */
 public class MouseEventHandler implements MouseController {
 
+    /**
+     * The main application instance that this handler is associated with.
+     * It is used to access application-wide services and functionalities.
+     */
     private final App app;
 
     /**
@@ -74,10 +78,14 @@ public class MouseEventHandler implements MouseController {
                         return;
                     }
                 }
-                new MenuWindow(PeriodicTable.getMAINBG());
+                MenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
+                app.getMouseListener().registerWindow(mw); //TODO: Remove MouseListener from MenuWindow
+                app.getWindowListener().registerWindow(mw);
+                mw.requestFocus();
+                mw.setState(Frame.NORMAL);
                 return;
-            }
-
+            } 
+            
             // Nur Labels behandeln
             if (!(e.getSource() instanceof JLabel label)) {
                 return;
@@ -112,6 +120,8 @@ public class MouseEventHandler implements MouseController {
             }
 
             ElementWindow ew = new ElementWindow(element);
+            ew.requestFocus();
+            ew.setState(Frame.NORMAL);
             app.getMouseListener().registerWindow(ew);
             app.getWindowListener().registerWindow(ew);
         }

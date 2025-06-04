@@ -24,10 +24,22 @@ import main.interfaces.FixElementWindow;
  * electron configuration, melting and boiling points, oxidation numbers, standard potential,
  * and group information. The window is styled with a background color corresponding to the element's
  * color in the periodic table.
+ * 
  */
 public class ElementWindow extends JFrame implements FixElementWindow {
 
+    /**
+     * The atomic number of the element displayed in this window.
+     * This is used to identify the element and retrieve its properties.
+     * It is a byte value, as atomic numbers are typically small integers.
+     */
     private final byte ELEMENT_INDEX;
+
+    /**
+     * The true dimension of the JFrame, which is used to reset the window size
+     * to its original dimensions when needed.
+     * This is set when the window is initialized and can be retrieved later.
+     */
     private final Dimension TRUE_DIMENSION;
 
     /**

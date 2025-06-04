@@ -42,6 +42,13 @@ public class SQLHandler {
     public SQLHandler() {
     }
 
+    /**
+     * The main method that serves as the entry point for the SQLHandler application.
+     * It connects to a SQLite database, creates a table if it doesn't exist,
+     * inserts a record, and retrieves records from the table.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         System.out.println(System.getProperty("java.class.path"));
         String dbUrl = "jdbc:sqlite:settings.db";

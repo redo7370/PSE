@@ -25,10 +25,34 @@ import main.interfaces.MouseController;
  */
 public class PSE extends JFrame {
 
+    /**
+     * The maximum number of columns in the periodic table.
+     * This value is determined dynamically based on the element table data.
+     */
     private static int maxColumns;
+
+    /**
+     * The maximum number of rows in the periodic table.
+     * This is a constant value representing the number of rows in the periodic table.
+     */
     private static final int MAX_ROWS = 7;
+
+    /**
+     * The true dimension of the PSE window, used to reset the window size.
+     * This is set when the window is initialized and can be retrieved later.
+     */
     private final Dimension TRUE_DIMENSION;
+
+    /**
+     * A list of JLabel objects representing the elements in the periodic table.
+     * Each label corresponds to an element and is used to display its symbol and properties.
+     */
     private final List<JLabel> elementLabels = new ArrayList<>();  // Liste für alle Element-Labels
+
+    /**
+     * A list of JButton objects for additional functionality, such as a menu button.
+     * These buttons can be used to trigger actions or navigate within the application.
+     */
     private final List<JButton> buttons = new ArrayList<>();
 
     /**

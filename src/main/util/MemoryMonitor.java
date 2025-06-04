@@ -11,7 +11,19 @@ package main.util;
  */
 public class MemoryMonitor implements Runnable {
 
+    /**
+     * Flag to control the running state of the memory monitor thread.
+     * When set to false, the thread will stop monitoring and exit.
+     */
     private volatile boolean running = true;
+
+    /**
+     * Starts the memory monitor thread.
+     * The thread will log memory usage until stopped.
+     */
+    public MemoryMonitor() {
+
+    }
 
     /**
      * Starts the memory monitor thread.

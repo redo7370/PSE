@@ -3321,6 +3321,12 @@ public class Elements {
         )
     );
 
+    /**
+     * List of all chemical elements in the periodic table.
+     * The order is based on the atomic number.
+     * The list includes all known elements as of Febuary 2025.
+     * The elements are represented as instances of the ChemicalElement class.
+     */
     private final static ChemicalElement[] LIST_OF_ELEMENTS = {
         HYDROGEN, HELIUM,
         LITHIUM, BERYLLIUM, BORON, CARBON, NITROGEN, OXYGEN, FLUORINE, NEON,
@@ -3335,6 +3341,14 @@ public class Elements {
         RUTHERFORDIUM, DUBNIUM, SEABORGIUM, BOHRIUM, HASSIUM, MEITNERIUM, DARMSTADTIUM, ROENTGENIUM, COPERNICUM, NIHONIUM, FLEROVIUM, MOSCOVIUM, LIVERMORIUM, TENNESSINE, OGANESSON
     };
 
+    /**
+     * Returns the list of all chemical elements in the periodic table.
+     * The order is based on the atomic number.
+     * 
+     * @param name the name or symbol of the chemical element to search for
+     *            (can be in different languages or the symbol)
+     * @return an array of ChemicalElement objects representing all known elements
+     */
     public static ChemicalElement getElement(String name) {
         for (ChemicalElement chemicalElement : LIST_OF_ELEMENTS) {
             if (name.equals(chemicalElement.getNames().get("de"))) { return chemicalElement; }

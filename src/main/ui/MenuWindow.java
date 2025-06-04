@@ -14,12 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.BorderFactory;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import main.data.PeriodicTable;
-
 /**
  * MenuWindow is a JFrame that provides a user interface for selecting light and dark modes,
  * as well as a language selection dropdown. It uses a GridBagLayout to arrange the components
@@ -125,19 +119,6 @@ public class MenuWindow extends JFrame {
 
         // Fenster sichtbar machen
         setVisible(true);
-    }
-
-
-    public static void main(String[] args) {
-        // GUI Issue Handling For macOS
-        try {
-            UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
-        } catch (UnsupportedLookAndFeelException e) {
-            System.err.println("Cannot set LookAndFeel");
-        }
-
-        // Reserve Thread To Run The GUI
-        SwingUtilities.invokeLater(() -> new MenuWindow(PeriodicTable.getMAINBG()));
     }
     
 }

@@ -8,5 +8,12 @@ package main.interfaces;
  * method for accessing the element number.
  */
 public interface FixElementWindow {
+
+    /**
+     * Retrieves the atomic number of the element displayed in this window.
+     * The atomic number is a byte value representing the unique identifier for the element.
+     *
+     * @return The atomic number of the element as a byte.
+     */
     byte getElementNum();
 }

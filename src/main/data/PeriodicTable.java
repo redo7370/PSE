@@ -10,9 +10,18 @@ import java.awt.Color;
  */
 public class PeriodicTable {
     
-    // Main background color for the periodic table UI
+    /**
+     * The main background color used in the periodic table UI.
+     * This color is applied to elements that do not have a specific chemical symbol.
+     */
     private static final Color MAIN_BG = new Color(64, 63, 60);
-    // 2D array representing the periodic table of elements
+    
+    /**
+     * A 2D array representing the periodic table of elements.
+     * Each row corresponds to a period, and each column corresponds to a group.
+     * The elements are represented by their chemical symbols.
+     * Empty strings represent unoccupied positions in the table.
+     */
     private static final String[][] ELEMENTS = {
         {"H", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "He"},
         {"Li", "Be", "", "", "", "", "", "", "", "", "", "", "B", "C", "N", "O", "F", "Ne"},

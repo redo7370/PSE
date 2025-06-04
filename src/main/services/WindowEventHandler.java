@@ -1,6 +1,8 @@
 package main.services;
 
 import main.interfaces.WindowController;
+import main.ui.ElementWindow;
+
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,10 @@ import java.awt.Frame;
  */
 public class WindowEventHandler implements WindowController {
 
+    /**
+     * A list that keeps track of all open windows in the application.
+     * This is used to monitor when the last window is closed, allowing the application to exit gracefully.
+     */
     private final List<Frame> openWindows = new ArrayList<>();
 
     /**
@@ -35,6 +41,13 @@ public class WindowEventHandler implements WindowController {
     };
 
     /**
+     * Constructor for WindowEventHandler.
+     * Initializes the handler and sets up the necessary listeners for window events.
+     */
+    public WindowEventHandler() {
+    }
+
+    /**
      * Returns the WindowListener that handles window events.
      * This listener is used to register with each window to monitor close events.
      * @param obj the object for which the listener is requested
@@ -49,13 +62,15 @@ public class WindowEventHandler implements WindowController {
     /**
      * Registers a window to be monitored for close events.
      * If the window is not already registered, it adds the window to the list
-     * and attaches the window listener to it.
+     * and attaches the window listener to it. ElementWindows are excluded from being registered.
      *
      * @param frame the Frame instance to register
      */
     public void registerWindow(Frame frame) {
         if (!openWindows.contains(frame)) {
-            openWindows.add(frame);
+            if (!(frame instanceof ElementWindow)){
+                openWindows.add(frame);
+            }
             frame.addWindowListener(windowListener);
         }
     }
