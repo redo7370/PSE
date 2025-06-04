@@ -2,9 +2,17 @@ package main.data;
 
 import java.awt.Color;
 
+/**
+ * PeriodicTable is a utility class that provides methods to retrieve information
+ * about the periodic table of elements, including element colors and their arrangement.
+ * It contains a static method to get the color associated with each element based on its type,
+ * and a method to retrieve the 2D array representation of the periodic table.
+ */
 public class PeriodicTable {
     
+    // Main background color for the periodic table UI
     private static final Color MAIN_BG = new Color(64, 63, 60);
+    // 2D array representing the periodic table of elements
     private static final String[][] ELEMENTS = {
         {"H", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "He"},
         {"Li", "Be", "", "", "", "", "", "", "", "", "", "", "B", "C", "N", "O", "F", "Ne"},
@@ -15,10 +23,19 @@ public class PeriodicTable {
         {"Fr", "Ra", "Ac", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"}
     };
 
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     */
     private PeriodicTable() {
     }
 
-    // Color Scheme
+    /**
+     * Returns the color associated with a given chemical element.
+     * The color is determined based on the type of element (e.g., nonmetals, metals, etc.).
+     *
+     * @param element The symbol of the chemical element (e.g., "H", "O", "Fe").
+     * @return The Color object representing the element's color.
+     */
     public static Color getElementColor(String element) {
 
         // default
@@ -78,10 +95,21 @@ public class PeriodicTable {
         return MAIN_BG; 
     }
 
+    /**
+     * Returns a 2D array representing the periodic table of elements.
+     * Each row corresponds to a period, and each column corresponds to a group.
+     *
+     * @return A 2D array of strings representing the periodic table.
+     */
     public static String[][] getElementTable() {
         return ELEMENTS;
     }
 
+    /**
+     * Returns the main background color used in the periodic table UI.
+     *
+     * @return The Color object representing the main background color.
+     */
     public static Color getMAINBG() {
         return MAIN_BG;
     }

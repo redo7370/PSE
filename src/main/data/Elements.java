@@ -2,7 +2,18 @@ package main.data;
 
 import java.util.Map;
 
+/**
+ * Elements class contains static instances of ChemicalElement representing
+ * the first 20 elements of the periodic table, along with their properties.
+ * This class is designed
+ */
 public class Elements {
+
+    /**
+     * Contructor is private to prevent instantiation.
+     */
+    private Elements(){
+    }
 
     private final static ChemicalElement HYDROGEN = new ChemicalElement(
         (byte) 1, 
@@ -59,7 +70,6 @@ public class Elements {
             Map.entry("jp", "希ガス")
         )
     );
-
 
     private final static ChemicalElement LITHIUM = new ChemicalElement(
         (byte) 3,
@@ -3322,10 +3332,8 @@ public class Elements {
         HAFNIUM, TANTALUM, TUNGSTEN, RHENIUM, OSMIUM, IRIDIUM, PLATINUM, GOLD, MERCURY, THALLIUM, LEAD, BISMUTH, POLONIUM, ASTATINE, RADON,
         FRANCIUM, RADIUM,
             ACTINIUM, THORIUM, PROTACTINIUM, URANIUM, NEPTUNIUM, PLUTONIUM, AMERICIUM, CURIUM, BERKELIUM, CALIFORNIUM, EINSTEINIUM, FERMIUM, MANDELEVIUM, NOBELIUM, LAWRENCIUM,
-        RUTHERFORDIUM, DUBNIUM, SEABORGIUM, BOHRIUM, HASSIUM, MEITNERIUM, DARMSTADTIUM, ROENTGENIUM, COPERNICUM, NIHONIUM, FLEROVIUM, MOSCOVIUM, LIVERMORIUM, TENNESSINE, OGANESSON};
-
-    private Elements(){
-    }
+        RUTHERFORDIUM, DUBNIUM, SEABORGIUM, BOHRIUM, HASSIUM, MEITNERIUM, DARMSTADTIUM, ROENTGENIUM, COPERNICUM, NIHONIUM, FLEROVIUM, MOSCOVIUM, LIVERMORIUM, TENNESSINE, OGANESSON
+    };
 
     public static ChemicalElement getElement(String name) {
         for (ChemicalElement chemicalElement : LIST_OF_ELEMENTS) {

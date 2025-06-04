@@ -1,0 +1,3 @@
+on-build:
+
+runtime: Java Runtime Integration for Standalone Usage

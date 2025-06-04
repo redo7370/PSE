@@ -1,11 +1,9 @@
 package test;
 
-import org.junit.Test;
-
 import main.data.PeriodicTable;
 
 import static org.junit.Assert.*;
-
+import org.junit.Test;
 import java.awt.Color;
 
 // Nur AssertEquals wird im Bash Skript berücksichtigt
