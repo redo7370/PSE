@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "label": "Run Test",
+    "type": "shell",
+    "command": "/bin/bash",
+    "args": [
+        "${workspaceFolder}/run_test.sh"
+    ],
+    "group": {
+        "kind": "build",
+        "isDefault": false
+    },
+    "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+    },
+    "tasks": []
+}

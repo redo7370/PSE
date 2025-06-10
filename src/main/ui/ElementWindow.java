@@ -34,14 +34,14 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.stream.IntStream;
 
 import main.data.ChemicalElement;
 import main.data.PeriodicTable;
 import main.interfaces.FixElementWindow;
-import main.App;
 
 /**
  * ElementWindow is a JFrame that displays detailed information about a specific chemical element.
@@ -65,15 +65,7 @@ public class ElementWindow extends JFrame implements FixElementWindow {
      * to its original dimensions when needed.
      * This is set when the window is initialized and can be retrieved later.
      */
-    private final Dimension START_DIMENSION = new Dimension(400, 400);
-
-    /**
-     * The main application instance that this window is associated with.
-     * It is used to access application-wide services and functionalities.
-     */
-    private final App app;
-
-    private ArrayList<JLabel> labelList = new ArrayList<>();
+    private final Dimension TRUE_DIMENSION;
 
     /**
      * Constructor for the ElementWindow class.
@@ -81,24 +73,25 @@ public class ElementWindow extends JFrame implements FixElementWindow {
      *
      * @param element The ChemicalElement object containing the element's data.
      */
-    public ElementWindow(ChemicalElement element, App app) {
+    public ElementWindow( ChemicalElement element) {
         this.ELEMENT_INDEX = element.getAtomicNumber();
-        this.app = app;
 
         setTitle(element.getNames().get("de"));
-        setSize(START_DIMENSION);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Set the background color based on the element's symbol
+        // MouseListener
+        TRUE_DIMENSION = getSize();
+
+        // Hintergrundfarbe aus PeriodicTable holen
         Color elementColor = PeriodicTable.getElementColor(element.getSymbol());
         getContentPane().setBackground(elementColor);
 
         setLayout(new BorderLayout());
 
-        // Create a JLabel for the element's symbol
         JLabel symbolLabel = new JLabel(element.getSymbol(), SwingConstants.CENTER);
-        symbolLabel.setFont(this.app.requestFont("Fira", 60));
+        symbolLabel.setFont(this.loadFontFromFile("res/fonts/FiraCode-Medium.ttf", 60));
         symbolLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         symbolLabel.setForeground(getContrastColor(elementColor));
         symbolLabel.setOpaque(false);
@@ -146,11 +139,8 @@ public class ElementWindow extends JFrame implements FixElementWindow {
         labelComp.setForeground(Color.BLACK);
         valueComp.setForeground(Color.BLACK);
 
-        labelComp.setFont(this.app.requestFont("FiraCode", 12));
-        valueComp.setFont(this.app.requestFont("FiraCode", 12));
-
-        labelList.add(labelComp);
-        labelList.add(valueComp);
+        labelComp.setFont(loadFontFromFile("res/fonts/FiraCode/FiraCode-Medium.ttf", 12));
+        valueComp.setFont(loadFontFromFile("res/fonts/FiraCode/FiraCode-Medium.ttf", 12));
 
         panel.add(labelComp);
         panel.add(valueComp);
@@ -195,19 +185,30 @@ public class ElementWindow extends JFrame implements FixElementWindow {
     }
 
     /**
+     * Loads a font from a file and returns it with the specified size.
+     * If the font cannot be loaded, it falls back to a default monospaced font.
+     *
+     * @param path The path to the font file.
+     * @param size The desired font size.
+     * @return The loaded Font object.
+     */
+    private Font loadFontFromFile(String path, float size) {
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File(path));
+            return font.deriveFont(size);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Font("Monospaced", Font.PLAIN, (int) size); // Fallback
+        }
+    }
+
+    /**
      * Returns the true dimension of the window, which is the size of the JFrame.
      * This can be useful for layout calculations or resizing operations.
      *
      * @return The true dimension of the JFrame.
      */
-    public Dimension getStartDimension() {
-        return this.START_DIMENSION;
-    }
-
-    public void updateLabelFont(String fontName, int size) {
-        for (JLabel label : labelList) {
-            label.setFont(this.app.requestFont(fontName, size));
-        }
+    public Dimension getTrueDimension() {
+        return this.TRUE_DIMENSION;
     }
 }
-

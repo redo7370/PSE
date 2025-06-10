@@ -1,6 +1,5 @@
 .DS_Store
 lib/*
-.vscode/*
 bin/*
 dependencies/runtime/*
 settings.db
