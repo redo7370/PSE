@@ -68,6 +68,12 @@ public class ElementWindow extends JFrame implements FixElementWindow {
     private final Dimension TRUE_DIMENSION;
 
     /**
+     * A StringBuilder used to construct the string representation of oxidation states.
+     * This is used to format the oxidation numbers for display in the window.
+     */
+    private StringBuilder stringbuilder = new StringBuilder();
+    
+    /**
      * Constructor for the ElementWindow class.
      * Initializes the JFrame with the element's details and styles it according to the element's color.
      *
@@ -91,7 +97,7 @@ public class ElementWindow extends JFrame implements FixElementWindow {
         setLayout(new BorderLayout());
 
         JLabel symbolLabel = new JLabel(element.getSymbol(), SwingConstants.CENTER);
-        symbolLabel.setFont(this.loadFontFromFile("res/fonts/FiraCode-Medium.ttf", 60));
+        symbolLabel.setFont(this.loadFontFromFile("res/fonts/FiraCode/FiraCode-Medium.ttf", 60));
         symbolLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         symbolLabel.setForeground(getContrastColor(elementColor));
         symbolLabel.setOpaque(false);
@@ -154,13 +160,14 @@ public class ElementWindow extends JFrame implements FixElementWindow {
      * @return A string representation of the oxidation states.
      */
     private String oxidationArrayToString(int[] arr) {
+        stringbuilder.setLength(0); // Reset StringBuilder
         if (arr == null || arr.length == 0) return "-";
-        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
-            sb.append(arr[i]);
-            if (i < arr.length -1) sb.append(", ");
+            stringbuilder.append(arr[i]);
+            if (i < arr.length -1) stringbuilder.append(", ");
         }
-        return sb.toString();
+
+        return stringbuilder.toString();
     }
 
     /**
