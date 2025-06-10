@@ -29,7 +29,7 @@ import main.data.PeriodicTable;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 // Nur AssertEquals wird im Bash Skript berücksichtigt
 
@@ -38,7 +38,7 @@ public class PSETest {
     @Test
     public void testGetElementColor() {
         Color color = PeriodicTable.getElementColor("Mg");
-        assertArrayEquals(new int[] {152, 173, 121}, new int[] { color.getRed(), color.getGreen(), color.getBlue() });
+        assertArrayEquals(new int[] {152, 173, 121}, new int[] { (int)(color.getRed() * 255), (int)(color.getGreen() * 255), (int)(color.getBlue() * 255) });
     }
 
 }

@@ -1,202 +1,102 @@
-/*
- * PSE - Periodic System of Elements (Learn and Information Application)
- * Copyright (C) 2025 Jim Feser
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact:
- *  Github: https://github.com/jimfeserHTW
- *
- * If this program interacts with users remotely through a computer network,
- * it must provide a way for users to get its source code, for example by
- * offering a “Source” link in the user interface (see section 13 of the AGPL).
- */
-
 package main.services;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
-import javax.swing.SwingUtilities;
-
 import java.awt.Frame;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import main.data.ChemicalElement;
 import main.data.Elements;
 import main.data.PeriodicTable;
 import main.interfaces.MouseController;
 import main.ui.ElementWindow;
 import main.ui.MenuWindow;
-import main.ui.PSE;
 import main.App;
 
-/**
- * MouseEventHandler is a service class that implements MouseController to handle mouse events
- * for the application. It listens for mouse clicks on elements in the periodic table and opens
- * corresponding ElementWindows or MenuWindows based on the clicked element.
- */
 public class MouseEventHandler implements MouseController {
 
-    /**
-     * The main application instance that this handler is associated with.
-     * It is used to access application-wide services and functionalities.
-     */
     private final App app;
 
-    /**
-     * Constructor for MouseEventHandler.
-     * Initializes the handler with the main application instance.
-     *
-     * @param app The main application instance.
-     */
     public MouseEventHandler(App app) {
         this.app = app;
     }
-    
-    /**
-     * MouseListener that handles mouse click events on windows.
-     * It opens an ElementWindow for the clicked element or a MenuWindow if the menu button is clicked.
-     * It also allows double-clicking on PSE or ElementWindow to resize them to their standard dimensions.
-     */
-    private final MouseListener elementClickListener = new MouseAdapter() {
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
+    @Override
+    public void handle(MouseEvent event) {
+        Object source = event.getSource();
 
-            Object source = e.getSource();
-            
-            if (source instanceof MenuWindow tb) {
-                JToggleButton[] toggleButtons = tb.getToggleButtons();
-                if (source == toggleButtons[0]) {
-                    if (toggleButtons[0].isSelected()) {
-                        toggleButtons[1].setSelected(false);
-                        System.out.println("Light mode aktiviert");
-                    } else if (!toggleButtons[1].isSelected()) {
-                        // Immer einen ausgewählt lassen
-                        toggleButtons[0].setSelected(true);
-                    }
-                } else if (source == toggleButtons[1]) {
-                    if (toggleButtons[1].isSelected()) {
-                        toggleButtons[0].setSelected(false);
-                        System.out.println("Dark mode aktiviert");
-                    } else if (!toggleButtons[0].isSelected()) {
-                        // Immer einen ausgewählt lassen
-                        toggleButtons[1].setSelected(true);
-                    }
-                }
-                return;
-            }
-            
-            int clickCount = e.getClickCount();
-            // Falls das Event vom PSE Fenster kommt (nicht Label oder Button)
-            if (source instanceof PSE pseFrame) {
-                if (clickCount == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !pseFrame.getSize().equals(pseFrame.getStartDimension())) {
-                    pseFrame.setSize(pseFrame.getStartDimension());
-                    pseFrame.setLocationRelativeTo(null);
-                }
-                return;
-            } else if (source instanceof ElementWindow ewFrame) {
-                if (clickCount == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !ewFrame.getSize().equals(ewFrame.getStartDimension())) {
-                    ewFrame.setSize(ewFrame.getStartDimension());
-                    ewFrame.setLocationRelativeTo(null);
-                }
-            }
-
-            // Menübutton-Klick
-            if (source instanceof JButton button && "Menü".equals(button.getText())) {
-                for (Frame frame : Frame.getFrames()) {
-                    if (frame instanceof main.ui.MenuWindow mw && frame.isDisplayable()) {
+        // Beispiel: Button "Menü" in JavaFX
+        if (source instanceof Button button) {
+            if ("Menü".equals(button.getText())) {
+                // Menüfenster anzeigen oder fokussieren
+                for (Window window : Stage.getWindows()) {
+                    if (window instanceof MenuWindow mw && window.isShowing()) {
                         mw.toFront();
                         mw.requestFocus();
-                        mw.setState(Frame.NORMAL);
                         return;
                     }
                 }
-
                 MenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
-                app.getMouseListener().registerWindow(mw); //TODO: Remove MouseListener from MenuWindow
-                app.getWindowListener().registerWindow(mw);
+                // hier müsstest du evtl. Register-Methoden für Fenster aufrufen, analog Swing
+                mw.show();
                 mw.requestFocus();
-                mw.setState(Frame.NORMAL);
-                return;
-            } 
-            
-            // Nur Labels behandeln
-            if (!(source instanceof JLabel label)) {
                 return;
             }
-
-            String symbol = label.getName();  // Symbol wurde vorher per setName() gesetzt
-
-            if (symbol == null || symbol.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Bitte ein Element eingeben.");
-                return;
-            }
-
-            ChemicalElement element = Elements.getElement(symbol);
-
-            if (element == null) {
-                JOptionPane.showMessageDialog(null, "Element nicht gefunden: " + symbol);
-                return;
-            }
-
-            byte targetAtomicNumber = element.getAtomicNumber();
-
-            // Fenster prüfen
-            for (Frame frame : Frame.getFrames()) {
-                if (frame instanceof ElementWindow ew && frame.isDisplayable()) {
-                    if (ew.getElementNum() == targetAtomicNumber) {
-                        frame.toFront();
-                        frame.requestFocus();
-                        frame.setState(Frame.NORMAL);
-                        return;
-                    }
-                }
-            }
-
-            ElementWindow ew = new ElementWindow(element, app);
-            ew.requestFocus();
-            ew.setState(Frame.NORMAL);
-            app.getMouseListener().registerWindow(ew);
-            app.getWindowListener().registerWindow(ew);
         }
-    };
 
-    /**
-     * Returns the MouseListener that handles mouse events for elements.
-     * This listener can be registered with any component that needs to respond to mouse clicks.
-     *
-     * @return The MouseListener instance for handling element clicks.
-     */
-    public MouseListener getMouseListener()  {
-        return this.elementClickListener;
+        // Labels mit Symbolen behandeln
+        if (!(source instanceof Label label)) {
+            return;
+        }
+
+        String symbol = label.getId();  // In JavaFX besser id statt Name
+
+        if (symbol == null || symbol.isEmpty()) {
+            // JavaFX-Dialog oder eigene Fehlermeldung
+            System.out.println("Bitte ein Element eingeben.");
+            return;
+        }
+
+        ChemicalElement element = Elements.getElement(symbol);
+
+        if (element == null) {
+            System.out.println("Element nicht gefunden: " + symbol);
+            return;
+        }
+
+        byte targetAtomicNumber = element.getAtomicNumber();
+
+        // Fenster-Logik JavaFX: Du müsstest deine Fensterklasse so anpassen,
+        // dass du alle offenen Fenster trackst. 
+        // Beispiel: Elemente öffnen, falls noch nicht offen, sonst fokusieren.
+
+        // Hier musst du deine Logik ergänzen, um offene Fenster zu tracken (z.B. mit eigener Liste).
+
+        ElementWindow ew = new ElementWindow(element, app);
+        ew.requestFocus();
+        // app.getMouseListener().registerWindow(ew); // Eventuell anpassen
+        // app.getWindowListener().registerWindow(ew); // Eventuell anpassen
     }
 
-    /**
-     * Registers a window to listen for mouse events.
-     * This method adds the elementClickListener to the specified Frame,
-     * allowing it to respond to mouse clicks on that window.
-     *
-     * @param frame The Frame instance to register for mouse events.
-     */
+    // Optional kannst du eine Methode zum Registrieren als EventHandler schreiben:
+    public EventHandler<MouseEvent> getMouseEventHandler() {
+        return this;
+    }
+
+    @Override
+    public EventHandler<MouseEvent> getMouseListener() {
+        return event -> {
+            // Beispielverhalten
+            System.out.println("Mouse clicked: " + event.getSceneX() + ", " + event.getSceneY());
+        };
+    }
+
+    @Override
     public void registerWindow(Frame frame) {
-        frame.addMouseListener(elementClickListener);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registerWindow'");
     }
 }

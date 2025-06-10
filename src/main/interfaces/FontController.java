@@ -1,6 +1,6 @@
 package main.interfaces;
 
-import java.awt.Font;
+import javafx.scene.text.Font;
 
 /** Font controller interface for managing font-related operations
  * This interface defines methods to retrieve fonts, supported font names,

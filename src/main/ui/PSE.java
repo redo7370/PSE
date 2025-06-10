@@ -1,214 +1,153 @@
-/*
- * PSE - Periodic System of Elements (Learn and Information Application)
- * Copyright (C) 2025 Jim Feser
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact:
- *  Github: https://github.com/jimfeserHTW
- *
- * If this program interacts with users remotely through a computer network,
- * it must provide a way for users to get its source code, for example by
- * offering a “Source” link in the user interface (see section 13 of the AGPL).
- */
-
 package main.ui;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
+import javafx.scene.Scene;
+import javafx.scene.Cursor;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
+import javafx.stage.Stage;
+import javafx.geometry.Pos;
 
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Dimension;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import main.data.PeriodicTable;
 import main.interfaces.MouseController;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 /**
- * PSE (Periodicsystem of Elements) is a JFrame that displays the periodic table of elements.
- * It uses a GridBagLayout to arrange the elements in a grid format.
- * Each element is represented by a JLabel, and mouse events can be handled through a MouseController.
- * The class also provides methods to set mouse event listeners and retrieve the true dimension of the frame.
+ * PSE (Periodensystem der Elemente) als JavaFX Stage mit GridPane Layout.
  */
-public class PSE extends JFrame {
+public class PSE extends Stage {
 
-    /**
-     * The maximum number of columns in the periodic table.
-     * This value is determined dynamically based on the element table data.
-     */
     private static int maxColumns;
-
-    /**
-     * The maximum number of rows in the periodic table.
-     * This is a constant value representing the number of rows in the periodic table.
-     */
     private static final int MAX_ROWS = 7;
 
-    /**
-     * The true dimension of the PSE window, used to reset the window size.
-     * This is set when the window is initialized and can be retrieved later.
-     */
-    private final Dimension START_DIMENSION = new Dimension(1000, 300); 
+    private final double START_WIDTH = 1000;
+    private final double START_HEIGHT = 300;
 
-    /**
-     * A list of JLabel objects representing the elements in the periodic table.
-     * Each label corresponds to an element and is used to display its symbol and properties.
-     */
-    private final List<JLabel> elementLabels = new ArrayList<>();  // Liste für alle Element-Labels
+    private final List<Label> elementLabels = new ArrayList<>();
+    private final List<Button> buttons = new ArrayList<>();
 
-    /**
-     * A list of JButton objects for additional functionality, such as a menu button.
-     * These buttons can be used to trigger actions or navigate within the application.
-     */
-    private final List<JButton> buttons = new ArrayList<>();
+    private GridPane mainGrid;
 
-    /**
-     * Constructor for the PSE class.
-     * Initializes the JFrame with a title, size, and background color.
-     * It also sets up the periodic table elements in a grid layout.
-     */
     public PSE() {
         setTitle("Periodensystem der Elemente");
-        setSize(START_DIMENSION);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        getContentPane().setBackground(PeriodicTable.getMAINBG());
+
+        mainGrid = new GridPane();
+        mainGrid.setBackground(new Background(new BackgroundFill(
+                javafx.scene.paint.Paint.valueOf(toRgbString(PeriodicTable.getMAINBG())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         String[][] elementTable = PeriodicTable.getElementTable();
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(PeriodicTable.getMAINBG());
-        this.add(mainPanel);
 
         maxColumns = 0;
         for (String[] row : elementTable) {
             maxColumns = Math.max(maxColumns, row.length);
         }
 
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        mainPanel.setLayout(gbl);
+        // Spalten- und Zeilenconstraints für gleichmäßige Verteilung
+        for (int i = 0; i < maxColumns; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPercentWidth(100.0 / maxColumns);
+            mainGrid.getColumnConstraints().add(colConst);
+        }
+        for (int i = 0; i < MAX_ROWS + 2; i++) {  // +2 für Menü-Button und Filler-Zeile
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setPercentHeight(100.0 / (MAX_ROWS + 2));
+            mainGrid.getRowConstraints().add(rowConst);
+        }
 
+        // Elemente erzeugen und ins Grid einfügen
         for (int i = 0; i < MAX_ROWS; i++) {
             for (int j = 0; j < maxColumns; j++) {
-
-                if (elementTable[i][j].equals("")) {
-                    JLabel label = new JLabel(" ");
-                    label.setBackground(PeriodicTable.getElementColor(elementTable[i][j]));
-                    label.setOpaque(true);
-                    label.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
-
-                    gbc.gridx = j;
-                    gbc.gridy = i;
-                    gbc.fill = GridBagConstraints.BOTH;
-                    gbc.anchor = GridBagConstraints.CENTER;
-                    gbc.weightx = 20;
-                    gbc.weighty = 20;
-
-                    mainPanel.add(label, gbc);
-                    continue;
+                String symbol = elementTable[i][j];
+                Label label;
+                if (symbol == null || symbol.isEmpty()) {
+                    label = createLabel(" ", PeriodicTable.getMAINBG());
+                } else {
+                    label = createLabel(" " + symbol, PeriodicTable.getElementColor(symbol));
+                    label.setCursor(Cursor.HAND);
+                    label.setId(symbol);  // ID als Ersatz für label.setName()
+                    elementLabels.add(label);
                 }
-
-                JLabel label = new JLabel(" " + elementTable[i][j]);
-                label.setBackground(PeriodicTable.getElementColor(elementTable[i][j]));
-                label.setOpaque(true);
-                label.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
-                label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-                label.setName(elementTable[i][j]);
-                elementLabels.add(label); // Label in Liste speichern (Listener wird später gesetzt)
-
-                gbc.gridx = j;
-                gbc.gridy = i;
-                gbc.fill = GridBagConstraints.BOTH;
-                gbc.anchor = GridBagConstraints.CENTER;
-                gbc.weightx = 20;
-                gbc.weighty = 20;
-
-                mainPanel.add(label, gbc);
+                mainGrid.add(label, j, i);
             }
         }
 
-        // Filler Label -- Seperator: Table/Input //
-        gbc.gridx = 0;
-        gbc.gridy = 8;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.weightx = 20;
-        gbc.weighty = 20;
-        gbc.gridwidth = maxColumns - 2;
-        JLabel fillerLabel = new JLabel(" ");
-        fillerLabel.setBackground(PeriodicTable.getMAINBG().brighter());
-        fillerLabel.setOpaque(true);
-        fillerLabel.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
-        mainPanel.add(fillerLabel, gbc);
+        // Filler Label - Trennung Tabelle / Input (Zeile 8)
+        Label fillerLabel = createLabel(" ", PeriodicTable.getMAINBG().brighter());
+        GridPane.setColumnSpan(fillerLabel, maxColumns - 2);
+        mainGrid.add(fillerLabel, 0, 8);
 
-        // Menu Button //
-        gbc.gridx = maxColumns - 2;
-        gbc.gridy = 8;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.weightx = 20;
-        gbc.weighty = 20;
-        gbc.gridwidth = 2;
-        JButton menuButton = new JButton("Menü");
-        menuButton.setBackground(new Color(150, 150, 150));
-        menuButton.setOpaque(true);
-        menuButton.setBorder(BorderFactory.createLineBorder(PeriodicTable.getMAINBG(), 2));
+        // Menü Button
+        Button menuButton = new Button("Menü");
+        menuButton.setStyle("-fx-background-color: rgb(150,150,150); -fx-border-color: " + toRgbString(PeriodicTable.getMAINBG()) + ";");
         buttons.add(menuButton);
-        mainPanel.add(menuButton, gbc);
+        GridPane.setColumnSpan(menuButton, 2);
+        mainGrid.add(menuButton, maxColumns - 2, 8);
 
-        setVisible(true);
+        Scene scene = new Scene(mainGrid, START_WIDTH, START_HEIGHT);
+        setScene(scene);
+        show();
     }
 
     /**
-     * Returns the start/standard window dimension of the PSE.
-     * 
-     * @return the start/standard dimension of the PSE window
+     * Hilfsmethode: Label mit Text und Hintergrundfarbe erstellen.
      */
-    public Dimension getStartDimension() {
-        return this.START_DIMENSION;
+    private Label createLabel(String text, Color bgColor) {
+        Label label = new Label(text);
+        label.setAlignment(Pos.CENTER);
+        label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        label.setBackground(new Background(new BackgroundFill(bgColor, CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setStyle("-fx-border-color: " + toRgbString(PeriodicTable.getMAINBG()) + "; -fx-border-width: 2;");
+        return label;
     }
 
     /**
-     * Sets the mouse event listener for the PSE.
-     * This method adds the provided MouseController's MouseListener to all element labels and buttons,
-     * allowing them to respond to mouse events.
-     * 
-     * @param mouseController the MouseController that handles mouse events
+     * Hilfsmethode: JavaFX Color in CSS rgb String umwandeln.
+     */
+    private String toRgbString(Color c) {
+        int r = (int) (c.getRed() * 255);
+        int g = (int) (c.getGreen() * 255);
+        int b = (int) (c.getBlue() * 255);
+        return String.format("rgb(%d,%d,%d)", r, g, b);
+    }
+
+    /**
+     * Gibt die Startgröße des Fensters zurück.
+     */
+    public javafx.geometry.Dimension2D getStartDimension() {
+        return new javafx.geometry.Dimension2D(START_WIDTH, START_HEIGHT);
+    }
+
+    /**
+     * Setzt den MouseController als EventHandler für alle Elemente und Buttons.
+     * Die Methode hängt die MouseListener des Controllers an alle Labels und Buttons.
+     * @param mouseController Controller mit MouseListener (JavaFX EventHandler)
      */
     public void setMouseEventListener(MouseController mouseController) {
         if (mouseController != null) {
-            MouseListener ml = mouseController.getMouseListener();
+            // In JavaFX erwartet man EventHandler<MouseEvent> statt MouseListener
+            EventHandler<MouseEvent> handler = mouseController.getMouseListener();
 
-            // Listener an alle Element-Labels hängen
-            for (JLabel label : elementLabels) {
-                label.addMouseListener(ml);
+            // An alle Element-Labels binden
+            for (Label label : elementLabels) {
+                label.setOnMouseClicked(handler);
             }
-
-            // Listener auch ans JFrame selbst hängen (für Fenster-Klicks)
-            this.addMouseListener(ml);
-
-            for (JButton button : buttons) {
-                button.addMouseListener(ml);
+            // An alle Buttons binden
+            for (Button button : buttons) {
+                button.setOnMouseClicked(handler);
             }
+            // An das Stage (Fenster) selbst binden
+            getScene().setOnMouseClicked(handler);
         }
     }
 }

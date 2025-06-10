@@ -32,8 +32,11 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
+
+import javafx.event.EventHandler;
+
 import java.awt.Frame;
 
 /**
@@ -48,20 +51,17 @@ public class WindowEventHandler implements WindowController {
      * A list that keeps track of all open windows in the application.
      * This is used to monitor when the last window is closed, allowing the application to exit gracefully.
      */
-    private final List<Frame> openWindows = new ArrayList<>();
+    private final List<Window> openWindows = new ArrayList<>();
 
     /**
      * WindowListener that listens for window close events.
      * When a window is closed, it removes the window from the list of open windows.
      * If there are no more open windows, it exits the application.
      */
-    private final WindowListener windowListener = new WindowAdapter() {
-        @Override
-        public void windowClosed(WindowEvent e) {
-            openWindows.remove(e.getSource());
-            if (openWindows.isEmpty()) {
-                System.exit(0);
-            }
+    private final EventHandler<WindowEvent> windowListener = event -> {
+        openWindows.remove(event.getTarget());
+        if (openWindows.isEmpty()) {
+            System.exit(0);
         }
     };
 
@@ -91,12 +91,22 @@ public class WindowEventHandler implements WindowController {
      *
      * @param frame the Frame instance to register
      */
-    public void registerWindow(Frame frame) {
-        if (!openWindows.contains(frame)) {
-            if (!(frame instanceof ElementWindow)){
-                openWindows.add(frame);
+    public void registerWindow(Window window) {
+        if (!openWindows.contains(window)) {
+            if (!(window instanceof ElementWindow)) { 
+                openWindows.add(window);
             }
-            frame.addWindowListener(windowListener);
+            // JavaFX: Kein addWindowListener, sondern z.B. Close-Request Handler
+            window.setOnCloseRequest(event -> {
+                openWindows.remove(window);
+                // Falls du noch etwas bei Schließen machen willst, hier rein
+            });
         }
+    }
+
+    @Override
+    public void registerWindow(Frame frame) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registerWindow'");
     }
 }

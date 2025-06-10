@@ -25,189 +25,145 @@
 
 package main.ui;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.stream.IntStream;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import main.data.ChemicalElement;
 import main.data.PeriodicTable;
-import main.interfaces.FixElementWindow;
 import main.App;
 
+import java.util.ArrayList;
+
 /**
- * ElementWindow is a JFrame that displays detailed information about a specific chemical element.
- * It includes the element's symbol, atomic number, name, atomic weight, electronegativity,
- * electron configuration, melting and boiling points, oxidation numbers, standard potential,
- * and group information. The window is styled with a background color corresponding to the element's
- * color in the periodic table.
- * 
+ * ElementWindow ist ein JavaFX-Stage, das Details eines chemischen Elements anzeigt.
+ * Entspricht funktional dem Swing-JFrame ElementWindow.
  */
-public class ElementWindow extends JFrame implements FixElementWindow {
+public class ElementWindow extends Stage {
 
-    /**
-     * The atomic number of the element displayed in this window.
-     * This is used to identify the element and retrieve its properties.
-     * It is a byte value, as atomic numbers are typically small integers.
-     */
     private final byte ELEMENT_INDEX;
+    private final double START_WIDTH = 400;
+    private final double START_HEIGHT = 400;
 
-    /**
-     * The true dimension of the JFrame, which is used to reset the window size
-     * to its original dimensions when needed.
-     * This is set when the window is initialized and can be retrieved later.
-     */
-    private final Dimension START_DIMENSION = new Dimension(400, 400);
-
-    /**
-     * The main application instance that this window is associated with.
-     * It is used to access application-wide services and functionalities.
-     */
     private final App app;
 
-    private ArrayList<JLabel> labelList = new ArrayList<>();
+    private final ArrayList<Label> labelList = new ArrayList<>();
 
-    /**
-     * Constructor for the ElementWindow class.
-     * Initializes the JFrame with the element's details and styles it according to the element's color.
-     *
-     * @param element The ChemicalElement object containing the element's data.
-     */
     public ElementWindow(ChemicalElement element, App app) {
         this.ELEMENT_INDEX = element.getAtomicNumber();
         this.app = app;
 
         setTitle(element.getNames().get("de"));
-        setSize(START_DIMENSION);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
 
-        // Set the background color based on the element's symbol
+        // Hintergrundfarbe ermitteln (JavaFX Color)
         Color elementColor = PeriodicTable.getElementColor(element.getSymbol());
-        getContentPane().setBackground(elementColor);
 
-        setLayout(new BorderLayout());
+        BorderPane root = new BorderPane();
+        root.setBackground(new Background(new BackgroundFill(elementColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        // Create a JLabel for the element's symbol
-        JLabel symbolLabel = new JLabel(element.getSymbol(), SwingConstants.CENTER);
-        symbolLabel.setFont(this.app.requestFont("Fira", 60));
-        symbolLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        symbolLabel.setForeground(getContrastColor(elementColor));
-        symbolLabel.setOpaque(false);
-        add(symbolLabel, BorderLayout.NORTH);
+        // Symbol Label oben
+        Label symbolLabel = new Label(element.getSymbol());
+        symbolLabel.setFont(app.getFontController().getFont("Fira", 60)); // JavaFX-Font laden, siehe Erklärung weiter unten
+        symbolLabel.setTextFill(getContrastColor(elementColor));
+        symbolLabel.setPadding(new Insets(10));
+        symbolLabel.setAlignment(Pos.CENTER);
+        BorderPane.setAlignment(symbolLabel, Pos.CENTER);
+        root.setTop(symbolLabel);
 
-        JPanel detailsPanel = new JPanel(new GridLayout(0, 2, 5, 5));
-        detailsPanel.setOpaque(false);
-        detailsPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        // Details-Grid
+        GridPane detailsGrid = new GridPane();
+        detailsGrid.setHgap(10);
+        detailsGrid.setVgap(5);
+        detailsGrid.setPadding(new Insets(10, 20, 10, 20));
 
-        addDetail(detailsPanel, "Ordnungszahl:", String.valueOf(element.getAtomicNumber()), 0);
-        addDetail(detailsPanel, "Name:", element.getNames().getOrDefault("de", "-"), 1);
-        addDetail(detailsPanel, "Atomgewicht:", String.valueOf(element.getAtomicWeight()), 1);
-        addDetail(detailsPanel, "Elektronegativität:", String.valueOf(element.getElectronegativity()), 0);
-        addDetail(detailsPanel, "Elektronenkonfiguration:", element.getElectronConfiguration(), 1);
-        addDetail(detailsPanel, "Schmelzpunkt (°K):", String.valueOf(element.getMeltingPoint()), 0);
-        addDetail(detailsPanel, "Siedepunkt (°K):", String.valueOf(element.getBoilingPoint()), 1);
-        addDetail(detailsPanel, "Oxidationszahlen:", oxidationArrayToString(IntStream.range(0, element.getOxidationNumbers().length).map(i -> element.getOxidationNumbers()[i]).toArray()), 0);
-        addDetail(detailsPanel, "Standardpotential (V):", String.valueOf(element.getStandardPotential()), 1);
-        addDetail(detailsPanel, "Gruppe:", element.isExtra().getOrDefault("de", "-"), 0);
+        // Details einfügen (Zeilenindex zählt)
+        int row = 0;
+        row = addDetail(detailsGrid, "Ordnungszahl:", String.valueOf(element.getAtomicNumber()), row);
+        row = addDetail(detailsGrid, "Name:", element.getNames().getOrDefault("de", "-"), row);
+        row = addDetail(detailsGrid, "Atomgewicht:", String.valueOf(element.getAtomicWeight()), row);
+        row = addDetail(detailsGrid, "Elektronegativität:", String.valueOf(element.getElectronegativity()), row);
+        row = addDetail(detailsGrid, "Elektronenkonfiguration:", element.getElectronConfiguration(), row);
+        row = addDetail(detailsGrid, "Schmelzpunkt (°K):", String.valueOf(element.getMeltingPoint()), row);
+        row = addDetail(detailsGrid, "Siedepunkt (°K):", String.valueOf(element.getBoilingPoint()), row);
+        row = addDetail(detailsGrid, "Oxidationszahlen:", oxidationArrayToString(element.getOxidationNumbers()), row);
+        row = addDetail(detailsGrid, "Standardpotential (V):", String.valueOf(element.getStandardPotential()), row);
+        row = addDetail(detailsGrid, "Gruppe:", element.isExtra().getOrDefault("de", "-"), row);
 
-        add(detailsPanel, BorderLayout.CENTER);
+        root.setCenter(detailsGrid);
 
-        setVisible(true);
+        Scene scene = new Scene(root, START_WIDTH, START_HEIGHT);
+        setScene(scene);
+        setResizable(false);
+
+        show();
     }
 
-    /**
-     * Adds a detail label and its corresponding value to the details panel.
-     * The background color alternates for each row to improve readability.
-     *
-     * @param panel The JPanel to which the detail will be added.
-     * @param label The label text for the detail.
-     * @param value The value text for the detail.
-     * @param rowIndex The index of the row, used to determine the background color.
-     */
-    private void addDetail(JPanel panel, String label, String value, int rowIndex) {
-        Color bgColor = (rowIndex % 2 == 0) ? new Color(200, 200, 200, 100) : new Color(220, 220, 220, 100);
-        JLabel labelComp = new JLabel(label);
-        JLabel valueComp = new JLabel(value);
+    private int addDetail(GridPane grid, String labelText, String valueText, int rowIndex) {
+        Color bgColor = (rowIndex % 2 == 0) ? Color.rgb(200, 200, 200, 0.4) : Color.rgb(220, 220, 220, 0.4);
 
-        labelComp.setOpaque(true);
-        valueComp.setOpaque(true);
-        labelComp.setBackground(bgColor);
-        valueComp.setBackground(bgColor);
+        Label label = new Label(labelText);
+        Label value = new Label(valueText);
 
-        labelComp.setForeground(Color.BLACK);
-        valueComp.setForeground(Color.BLACK);
+        label.setBackground(new Background(new BackgroundFill(bgColor, CornerRadii.EMPTY, Insets.EMPTY)));
+        value.setBackground(new Background(new BackgroundFill(bgColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        labelComp.setFont(this.app.requestFont("FiraCode", 12));
-        valueComp.setFont(this.app.requestFont("FiraCode", 12));
+        label.setTextFill(Color.BLACK);
+        value.setTextFill(Color.BLACK);
 
-        labelList.add(labelComp);
-        labelList.add(valueComp);
+        label.setFont(app.getFontController().getFont("FiraCode", 12));
+        value.setFont(app.getFontController().getFont("FiraCode", 12));
 
-        panel.add(labelComp);
-        panel.add(valueComp);
+        label.setPadding(new Insets(2, 5, 2, 5));
+        value.setPadding(new Insets(2, 5, 2, 5));
+
+        grid.add(label, 0, rowIndex);
+        grid.add(value, 1, rowIndex);
+
+        labelList.add(label);
+        labelList.add(value);
+
+        return rowIndex + 1;
     }
 
-    /**
-     * Converts an array of oxidation states to a string representation.
-     * If the array is empty or null, it returns a dash ("-").
-     *
-     * @param arr The array of oxidation states.
-     * @return A string representation of the oxidation states.
-     */
-    private String oxidationArrayToString(int[] arr) {
+    private String oxidationArrayToString(byte[] arr) {
         if (arr == null || arr.length == 0) return "-";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
             sb.append(arr[i]);
-            if (i < arr.length -1) sb.append(", ");
+            if (i < arr.length - 1) sb.append(", ");
         }
         return sb.toString();
     }
 
-    /**
-     * Determines a contrasting color (black or white) based on the luminance of the background color.
-     * This is used to ensure that text is readable against the background color.
-     *
-     * @param bg The background color.
-     * @return A contrasting color (black or white).
-     */
     private Color getContrastColor(Color bg) {
-        double luminance = (0.299 * bg.getRed() + 0.587 * bg.getGreen() + 0.114 * bg.getBlue()) / 255;
+        double luminance = (0.299 * bg.getRed() + 0.587 * bg.getGreen() + 0.114 * bg.getBlue());
         return luminance > 0.5 ? Color.BLACK : Color.WHITE;
     }
 
-    /**
-     * Returns the atomic number of the element displayed in this window.
-     *
-     * @return The atomic number of the element.
-     */
     public byte getElementNum() {
-        return this.ELEMENT_INDEX;
+        return ELEMENT_INDEX;
+    }
+
+    public double getStartWidth() {
+        return START_WIDTH;
+    }
+
+    public double getStartHeight() {
+        return START_HEIGHT;
     }
 
     /**
-     * Returns the true dimension of the window, which is the size of the JFrame.
-     * This can be useful for layout calculations or resizing operations.
-     *
-     * @return The true dimension of the JFrame.
+     * Update font aller Labels dynamisch (entsprechend Swing-Methode)
      */
-    public Dimension getStartDimension() {
-        return this.START_DIMENSION;
-    }
-
     public void updateLabelFont(String fontName, int size) {
-        for (JLabel label : labelList) {
-            label.setFont(this.app.requestFont(fontName, size));
+        Font font = app.getFontController().getFont(fontName, size);
+        for (Label label : labelList) {
+            label.setFont(font);
         }
     }
 }
-

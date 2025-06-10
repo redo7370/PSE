@@ -25,15 +25,17 @@
 
 package main.interfaces;
 
-import java.awt.event.MouseListener;
 import java.awt.Frame;
+
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 /**
  * MouseController is an interface that defines methods for handling mouse events
  * in the application. It provides a way to retrieve a MouseListener and register
  * windows to listen for mouse events.
  */
-public interface MouseController {
+public interface MouseController extends EventHandler<MouseEvent> {
 
     /**
      * Returns a MouseListener that handles mouse events for the application.
@@ -42,7 +44,7 @@ public interface MouseController {
      *
      * @return A MouseListener instance that handles mouse events.
      */
-    MouseListener getMouseListener();
+    EventHandler<MouseEvent> getMouseListener();
 
     /**
      * Registers a window to listen for mouse events.

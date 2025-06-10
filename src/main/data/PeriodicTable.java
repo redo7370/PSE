@@ -25,7 +25,7 @@
 
 package main.data;
 
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * PeriodicTable is a utility class that provides methods to retrieve information
@@ -39,7 +39,7 @@ public class PeriodicTable {
      * The main background color used in the periodic table UI.
      * This color is applied to elements that do not have a specific chemical symbol.
      */
-    private static final Color MAIN_BG = new Color(64, 63, 60);
+    private static final Color MAIN_BG = Color.rgb(64, 63, 60);
     
     /**
      * A 2D array representing the periodic table of elements.
@@ -80,53 +80,53 @@ public class PeriodicTable {
         // Nichtmetalle (Rot)
         for (String elem: new String[] {"H", "C", "N", "O", "P", "S", "Se"}) {
             if (element.equals(elem)){
-                return new Color(225, 130, 135);      
+                return Color.rgb(225, 130, 135);
             }
         }
         // Alkaliemetalle (Grün)
         for (String elem: new String[] {"Li", "Na", "K", "Rb", "Cs", "Fr"}) {
             if (element.equals(elem)){
-                return new Color(183, 206, 143);     
+                return Color.rgb(183, 206, 143);
             }
         }
         // Erdalkalimetalle (Dunkelgrün)
         for (String elem: new String[] {"Be", "Mg", "Ca", "Sr", "Ba", "Ra"}) {
             if (element.equals(elem)){
-                return new Color(152, 173, 121);     
+                return Color.rgb(152, 173, 121);
             }
         }
         // Übergangsmetalle (Blau)
         for (String elem: new String[] {"Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "La", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Ac", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn"}) {
             if (element.equals(elem)){
-                return new Color(122, 149, 179);    
+                return Color.rgb(122, 149, 179);
             }
         }
         // Andere Metalle (Lila)
         for (String elem: new String[] {"B", "Si", "Ge", "As", "Sb", "Te", "Po"}) {
             if (element.equals(elem)){
-                return new Color(194, 156, 178);    
+                return Color.rgb(194, 156, 178);
             }
         }
         // Halbmetalle (hell Lila)
         for (String elem: new String[] {"Al", "Ga", "In", "Sn", "Tl", "Pb", "Bi", "Nh", "Fl", "Mc", "Lv"}) {
             if (element.equals(elem)){
-                return new Color(164, 131, 166);   
+                return Color.rgb(164, 131, 166);
             }
         }
         // Halogene (orange/beige)
         for (String elem: new String[] {"F", "Cl", "Br", "I", "At", "Ts"}) {
             if (element.equals(elem)){
-                return new Color(233, 165, 153);   
+                return Color.rgb(233, 165, 153);
             }
         }
         // Edelgase (Gelb/Beige)
         for (String elem: new String[] {"He", "Ne", "Ar", "Kr", "Xe", "Rn", "Og"}) {
             if (element.equals(elem)){
-                return new Color(241, 197, 169);  
+                return Color.rgb(241, 197, 169);
             }
         }
-        
-        return MAIN_BG; 
+
+        return MAIN_BG;
     }
 
     /**
