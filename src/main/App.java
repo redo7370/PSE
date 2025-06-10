@@ -89,26 +89,6 @@ public class App {
      * @param args command line arguments (not used)
      */
     public static void main(String[] args) {
-        MemoryMonitor monitor = new MemoryMonitor();
-        Thread monitorThread = new Thread(monitor);
-        monitorThread.setName("Monitor");
-        monitorThread.setDaemon(true);
-        monitorThread.start();
-        
-        new App();
-    }
-
-    /**
-     * Initializes the application by setting up the mouse and window event handlers,
-     * and configuring the GUI look and feel.
-     * This method is invoked on the Event Dispatch Thread (EDT) to ensure that
-     * all GUI-related operations are performed in a thread-safe manner.
-     */
-    private void start() {
-        mc = new MouseEventHandler(this);
-        wc = new WindowEventHandler();
-        fc = new FontHandler();
-
         // GUI Issue Handling For macOS
         try {
             UIManager.setLookAndFeel(new javax.swing.plaf.metal.MetalLookAndFeel());
@@ -118,14 +98,50 @@ public class App {
 
         // Reserve Thread To Run The GUI
         javax.swing.SwingUtilities.invokeLater(() -> {
-            PSE pse = new PSE();
-            pse.setMouseEventListener(mc);
-            wc.addWindowListener(pse);
+            new App();
         });
     }
 
     /**
+     * Initializes the application by setting up the mouse and window event handlers,
+     * and configuring the GUI look and feel.
+     * This method is invoked on the Event Dispatch Thread (EDT) to ensure that
+     * all GUI-related operations are performed in a thread-safe manner.
+     */
+    private void start() {
+
+        this.invokeMemoryMonitor();
+
+        mc = new MouseEventHandler(this);
+        wc = new WindowEventHandler();
+        fc = new FontHandler();
+
+        PSE pse = new PSE();
+        pse.setMouseEventListener(mc);
+        wc.addWindowListener(pse);
+        
+    }
+
+    /**
+     * Invokes the MemoryMonitor to track memory usage.
+     * This method is deprecated and should not be used in release code.
+     * It runs the MemoryMonitor in a separate daemon thread to avoid blocking
+     * the JVM shutdown process.
+     * 
+     * @deprecated This method is only for development purposes and may be removed in future releases.
+     */
+    @Deprecated
+    private void invokeMemoryMonitor() {
+        MemoryMonitor monitor = new MemoryMonitor();
+        Thread monitorThread = new Thread(monitor);
+        monitorThread.setName("Monitor");
+        monitorThread.setDaemon(true);
+        monitorThread.start();
+    }
+
+    /**
      * Returns the mouse event handler for this application.
+     * Used by the PSE, MenuWindow and ElementWindow to handle mouse events.
      * 
      * @return the MouseController instance handling mouse events
      */
@@ -135,6 +151,7 @@ public class App {
     
     /**
      * Returns the window event handler for this application.
+     * Used by the PSE, MenuWindow and ElementWindow to handle window events.
      * 
      * @return the WindowController instance handling window events
      */
