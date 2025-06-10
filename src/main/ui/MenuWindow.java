@@ -28,6 +28,7 @@ package main.ui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Insets;
 
 import java.awt.event.ActionEvent;
@@ -48,6 +49,9 @@ import javax.swing.BorderFactory;
  * The background color can be customized, and the layout is designed to be user-friendly with appropriate spacing.
  */
 public class MenuWindow extends JFrame {
+
+    private final JToggleButton lightModeToggle, darkModeToggle;
+    private final Dimension startDimension = new Dimension(300, 300);
     
     /**
      * Constructor for the MenuWindow class.
@@ -59,7 +63,7 @@ public class MenuWindow extends JFrame {
      */
     public MenuWindow(Color bg) {
         setTitle("Menü");
-        setSize(300, 300);
+        setSize(startDimension);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBackground(bg);
 
@@ -81,7 +85,7 @@ public class MenuWindow extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        JToggleButton lightModeToggle = new JToggleButton("Light");
+        lightModeToggle = new JToggleButton("Light");
         lightModeToggle.setBackground(new Color(255, 255, 180));  // hellgelb
         lightModeToggle.setOpaque(true);
         lightModeToggle.setBorder(BorderFactory.createLineBorder(Color.YELLOW.darker(), 2));
@@ -91,7 +95,7 @@ public class MenuWindow extends JFrame {
         // Dark Button - dunkles Blau mit weißem Text
         gbc.gridx = 3;
         gbc.gridy = 0;
-        JToggleButton darkModeToggle = new JToggleButton("Dark");
+        darkModeToggle = new JToggleButton("Dark");
         darkModeToggle.setBackground(new Color(50, 50, 100));  // dunkles Blau
         darkModeToggle.setOpaque(true);
         darkModeToggle.setBorder(BorderFactory.createLineBorder(Color.BLUE.darker(), 2));
@@ -145,5 +149,12 @@ public class MenuWindow extends JFrame {
         // Fenster sichtbar machen
         setVisible(true);
     }
-    
+
+    public JToggleButton[] getToggleButtons() {
+        return new JToggleButton[]{ lightModeToggle, darkModeToggle };
+    }
+
+    public Dimension getStartDimension() {
+        return startDimension;
+    }
 }

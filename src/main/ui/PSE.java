@@ -66,7 +66,7 @@ public class PSE extends JFrame {
      * The true dimension of the PSE window, used to reset the window size.
      * This is set when the window is initialized and can be retrieved later.
      */
-    private final Dimension TRUE_DIMENSION;
+    private final Dimension START_DIMENSION = new Dimension(1000, 300); 
 
     /**
      * A list of JLabel objects representing the elements in the periodic table.
@@ -87,11 +87,9 @@ public class PSE extends JFrame {
      */
     public PSE() {
         setTitle("Periodensystem der Elemente");
-        setSize(1000, 300);
+        setSize(START_DIMENSION);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         getContentPane().setBackground(PeriodicTable.getMAINBG());
-
-        TRUE_DIMENSION = getSize();
 
         String[][] elementTable = PeriodicTable.getElementTable();
 
@@ -185,8 +183,8 @@ public class PSE extends JFrame {
      * 
      * @return the start/standard dimension of the PSE window
      */
-    public Dimension getTrueDimension() {
-        return this.TRUE_DIMENSION;
+    public Dimension getStartDimension() {
+        return this.START_DIMENSION;
     }
 
     /**

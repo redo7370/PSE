@@ -28,6 +28,7 @@ package main.services;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 
 import java.awt.Frame;
@@ -77,24 +78,49 @@ public class MouseEventHandler implements MouseController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
+            Object source = e.getSource();
+            
+            if (source instanceof MenuWindow tb) {
+                JToggleButton[] toggleButtons = tb.getToggleButtons();
+                if (source == toggleButtons[0]) {
+                    if (toggleButtons[0].isSelected()) {
+                        toggleButtons[1].setSelected(false);
+                        System.out.println("Light mode aktiviert");
+                    } else if (!toggleButtons[1].isSelected()) {
+                        // Immer einen ausgewählt lassen
+                        toggleButtons[0].setSelected(true);
+                    }
+                } else if (source == toggleButtons[1]) {
+                    if (toggleButtons[1].isSelected()) {
+                        toggleButtons[0].setSelected(false);
+                        System.out.println("Dark mode aktiviert");
+                    } else if (!toggleButtons[0].isSelected()) {
+                        // Immer einen ausgewählt lassen
+                        toggleButtons[1].setSelected(true);
+                    }
+                }
+                return;
+            }
+            
+            int clickCount = e.getClickCount();
             // Falls das Event vom PSE Fenster kommt (nicht Label oder Button)
-            if (e.getSource() instanceof PSE pseFrame) {
-                if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !pseFrame.getSize().equals(pseFrame.getTrueDimension())) {
-                    pseFrame.setSize(pseFrame.getTrueDimension());
+            if (source instanceof PSE pseFrame) {
+                if (clickCount == 2 && SwingUtilities.isLeftMouseButton(e) 
+                        && !pseFrame.getSize().equals(pseFrame.getStartDimension())) {
+                    pseFrame.setSize(pseFrame.getStartDimension());
                     pseFrame.setLocationRelativeTo(null);
                 }
                 return;
-            } else if (e.getSource() instanceof ElementWindow ewFrame) {
-                if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !ewFrame.getSize().equals(ewFrame.getTrueDimension())) {
-                    ewFrame.setSize(ewFrame.getTrueDimension());
+            } else if (source instanceof ElementWindow ewFrame) {
+                if (clickCount == 2 && SwingUtilities.isLeftMouseButton(e) 
+                        && !ewFrame.getSize().equals(ewFrame.getStartDimension())) {
+                    ewFrame.setSize(ewFrame.getStartDimension());
                     ewFrame.setLocationRelativeTo(null);
                 }
             }
 
             // Menübutton-Klick
-            if (e.getSource() instanceof JButton button && "Menü".equals(button.getText())) {
+            if (source instanceof JButton button && "Menü".equals(button.getText())) {
                 for (Frame frame : Frame.getFrames()) {
                     if (frame instanceof main.ui.MenuWindow mw && frame.isDisplayable()) {
                         mw.toFront();
@@ -103,6 +129,7 @@ public class MouseEventHandler implements MouseController {
                         return;
                     }
                 }
+
                 MenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
                 app.getMouseListener().registerWindow(mw); //TODO: Remove MouseListener from MenuWindow
                 app.getWindowListener().registerWindow(mw);
@@ -112,7 +139,7 @@ public class MouseEventHandler implements MouseController {
             } 
             
             // Nur Labels behandeln
-            if (!(e.getSource() instanceof JLabel label)) {
+            if (!(source instanceof JLabel label)) {
                 return;
             }
 
@@ -144,7 +171,7 @@ public class MouseEventHandler implements MouseController {
                 }
             }
 
-            ElementWindow ew = new ElementWindow(element);
+            ElementWindow ew = new ElementWindow(element, app);
             ew.requestFocus();
             ew.setState(Frame.NORMAL);
             app.getMouseListener().registerWindow(ew);

@@ -28,8 +28,12 @@ package main;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import java.awt.Font;
+
+import main.interfaces.FontController;
 import main.interfaces.MouseController;
 import main.interfaces.WindowController;
+import main.services.FontHandler;
 import main.services.MouseEventHandler;
 import main.services.WindowEventHandler;
 import main.ui.PSE;
@@ -60,6 +64,11 @@ public class App {
      * The WindowController instance that handles window events in the application.
      */
     private WindowController wc;
+
+    /**
+     * The FontController instance that manages font operations in the application.
+     */
+    private FontController fc;
 
     /**
      * The main method that serves as the entry point for the application.
@@ -98,6 +107,7 @@ public class App {
     private void start() {
         mc = new MouseEventHandler(this);
         wc = new WindowEventHandler();
+        fc = new FontHandler();
 
         // GUI Issue Handling For macOS
         try {
@@ -130,6 +140,19 @@ public class App {
      */
     public WindowController getWindowListener() {
         return this.wc;
+    }
+
+    /**
+     * Returns the font controller for this application.
+     * 
+     * @return the FontController instance handling font operations
+     */
+    public FontController getFontController() {
+        return this.fc;
+    }
+
+    public Font requestFont(String fontName, int size) {
+        return this.fc.getFont(fontName, size);
     }
     
 }
