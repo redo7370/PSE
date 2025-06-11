@@ -33,6 +33,7 @@ import java.awt.Font;
 import main.interfaces.FontController;
 import main.interfaces.MouseController;
 import main.interfaces.WindowController;
+import main.interfaces.AdjustablePSE;
 import main.services.FontHandler;
 import main.services.MouseEventHandler;
 import main.services.WindowEventHandler;
@@ -116,7 +117,7 @@ public class App {
         wc = new WindowEventHandler();
         fc = new FontHandler();
 
-        PSE pse = new PSE();
+        AdjustablePSE pse = new PSE();
         pse.setMouseEventListener(mc);
         wc.addWindowListener(pse);
         

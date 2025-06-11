@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.data.PeriodicTable;
+import main.interfaces.AdjustablePSE;
 import main.interfaces.MouseController;
 
 /**
@@ -48,7 +49,7 @@ import main.interfaces.MouseController;
  * Each element is represented by a JLabel, and mouse events can be handled through a MouseController.
  * The class also provides methods to set mouse event listeners and retrieve the true dimension of the frame.
  */
-public class PSE extends JFrame {
+public class PSE extends JFrame implements AdjustablePSE{
 
     /**
      * The maximum number of columns in the periodic table.
@@ -185,6 +186,7 @@ public class PSE extends JFrame {
      * 
      * @return the start/standard dimension of the PSE window
      */
+    @Override
     public Dimension getTrueDimension() {
         return this.TRUE_DIMENSION;
     }
@@ -196,6 +198,7 @@ public class PSE extends JFrame {
      * 
      * @param mouseController the MouseController that handles mouse events
      */
+    @Override
     public void setMouseEventListener(MouseController mouseController) {
         if (mouseController != null) {
             MouseListener ml = mouseController.getMouseListener();
@@ -212,5 +215,26 @@ public class PSE extends JFrame {
                 button.addMouseListener(ml);
             }
         }
+    }
+
+    @Override
+    public void setLanguage(String lang) {
+        //TODO: Implement language setting logic here if needed
+        // Implement language setting logic here if needed
+        // This method can be used to change the language of the PSE interface
+    }
+
+    @Override
+    public void setFont(String fontName, int fontSize) {
+        //TODO: Implement font setting logic here if needed
+        // Implement font setting logic here if needed
+        // This method can be used to change the font of the PSE interface
+    }
+
+    @Override
+    public void setDarkMode(boolean darkMode) {
+        //TODO: Implement dark mode setting logic here if needed
+        // Implement dark mode setting logic here if needed
+        // This method can be used to toggle dark mode for the PSE interface
     }
 }

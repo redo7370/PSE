@@ -1,28 +1,3 @@
-/*
- * PSE - Periodic System of Elements (Learn and Information Application)
- * Copyright (C) 2025 Jim Feser
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact:
- *  Github: https://github.com/jimfeserHTW
- *
- * If this program interacts with users remotely through a computer network,
- * it must provide a way for users to get its source code, for example by
- * offering a “Source” link in the user interface (see section 13 of the AGPL).
- */
-
 package main.ui;
 
 import java.awt.GridBagConstraints;
@@ -31,39 +6,41 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+
+import main.interfaces.AdjustableMenuWindow;
+
 import javax.swing.BorderFactory;
 
 /**
  * MenuWindow is a JFrame that provides a user interface for selecting light and dark modes,
- * as well as a language selection dropdown. It uses a GridBagLayout to arrange the components
- * in a structured manner.
- * 
- * The window features two toggle buttons for light and dark modes, and a combo box for language selection.
- * The background color can be customized, and the layout is designed to be user-friendly with appropriate spacing.
+ * as well as a language selection dropdown and font settings.
+ * It uses a GridBagLayout to arrange the components in a structured manner.
  */
-public class MenuWindow extends JFrame {
+public class MenuWindow extends JFrame implements AdjustableMenuWindow{
 
     private final JToggleButton lightModeToggle, darkModeToggle;
-    private final Dimension startDimension = new Dimension(300, 300);
-    
+    private final Dimension trueDimension = new Dimension(350, 220);
+    private final JComboBox<String> fontSelect;
+    private final JComboBox<Integer> fontSizeSelect;
+
     /**
      * Constructor for the MenuWindow class.
      * Initializes the JFrame with a title, size, and background color.
      * Sets up the layout and adds toggle buttons for light and dark modes,
-     * as well as a language selection combo box.
+     * as well as a language selection combo box and font selection controls.
      *
      * @param bg The background color for the window.
      */
     public MenuWindow(Color bg) {
         setTitle("Menü");
-        setSize(startDimension);
+        setSize(trueDimension);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBackground(bg);
 
@@ -79,24 +56,23 @@ public class MenuWindow extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.weightx = 0;
         gbc.weighty = 0;
-        gbc.insets = new Insets(8, 8, 8, 8); // größerer Abstand für Luftigkeit
+        gbc.insets = new Insets(8, 8, 8, 8); // Abstand für Luftigkeit
 
-        // Light Button - freundlich hellgelb
-        gbc.gridx = 1;
+        // Light Mode Toggle Button - hellgelb
         gbc.gridy = 0;
+        gbc.gridx = 1;
         gbc.gridwidth = 1;
         lightModeToggle = new JToggleButton("Light");
-        lightModeToggle.setBackground(new Color(255, 255, 180));  // hellgelb
+        lightModeToggle.setBackground(new Color(255, 255, 180));
         lightModeToggle.setOpaque(true);
         lightModeToggle.setBorder(BorderFactory.createLineBorder(Color.YELLOW.darker(), 2));
         lightModeToggle.setForeground(Color.DARK_GRAY);
         mainPanel.add(lightModeToggle, gbc);
 
-        // Dark Button - dunkles Blau mit weißem Text
+        // Dark Mode Toggle Button - dunkles Blau
         gbc.gridx = 3;
-        gbc.gridy = 0;
         darkModeToggle = new JToggleButton("Dark");
-        darkModeToggle.setBackground(new Color(50, 50, 100));  // dunkles Blau
+        darkModeToggle.setBackground(new Color(50, 50, 100));
         darkModeToggle.setOpaque(true);
         darkModeToggle.setBorder(BorderFactory.createLineBorder(Color.BLUE.darker(), 2));
         darkModeToggle.setForeground(Color.WHITE);
@@ -105,56 +81,117 @@ public class MenuWindow extends JFrame {
         lightModeToggle.setSelected(true);
         darkModeToggle.setSelected(false);
 
-        // Gemeinsamer Listener
-        ActionListener toggleListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JToggleButton source = (JToggleButton) e.getSource();
-                if (source == lightModeToggle) {
-                    if (lightModeToggle.isSelected()) {
-                        darkModeToggle.setSelected(false);
-                        System.out.println("Light mode aktiviert");
-                    } else if (!darkModeToggle.isSelected()) {
-                        // Immer einen ausgewählt lassen
-                        lightModeToggle.setSelected(true);
-                    }
-                } else if (source == darkModeToggle) {
-                    if (darkModeToggle.isSelected()) {
-                        lightModeToggle.setSelected(false);
-                        System.out.println("Dark mode aktiviert");
-                    } else if (!lightModeToggle.isSelected()) {
-                        // Immer einen ausgewählt lassen
-                        darkModeToggle.setSelected(true);
-                    }
+        // Gemeinsamer Listener für Mode Toggle Buttons
+        ActionListener toggleListener = e -> {
+            JToggleButton source = (JToggleButton) e.getSource();
+            if (source == lightModeToggle) {
+                if (lightModeToggle.isSelected()) {
+                    darkModeToggle.setSelected(false);
+                    System.out.println("Light mode aktiviert");
+                } else if (!darkModeToggle.isSelected()) {
+                    lightModeToggle.setSelected(true); // mind. einer aktiv
+                }
+            } else if (source == darkModeToggle) {
+                if (darkModeToggle.isSelected()) {
+                    lightModeToggle.setSelected(false);
+                    System.out.println("Dark mode aktiviert");
+                } else if (!lightModeToggle.isSelected()) {
+                    darkModeToggle.setSelected(true); // mind. einer aktiv
                 }
             }
         };
-
-        // Listener hinzufügen
         lightModeToggle.addActionListener(toggleListener);
         darkModeToggle.addActionListener(toggleListener);
 
-
-        // Language ComboBox - frisches Grün mit weißem Text
-        gbc.gridx = 1;
+        // Sprache ComboBox - hellgrün mit weißem Text
         gbc.gridy = 1;
+        gbc.gridx = 1;
         gbc.gridwidth = 3;
         JComboBox<String> languageSelect = new JComboBox<>(new String[]{"Deutsch", "English"});
-        languageSelect.setBackground(new Color(120, 200, 120));  // helles Grün
+        languageSelect.setBackground(new Color(120, 200, 120));
         languageSelect.setOpaque(true);
         languageSelect.setBorder(BorderFactory.createLineBorder(new Color(0, 150, 0), 2));
         languageSelect.setForeground(Color.WHITE);
         mainPanel.add(languageSelect, gbc);
 
-        // Fenster sichtbar machen
+        // Font Auswahl - System-Schriftarten laden
+        String[] fonts = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getAvailableFontFamilyNames();
+        fontSelect = new JComboBox<>(fonts);
+        fontSelect.setSelectedItem("SansSerif"); // Default
+        fontSelect.setBackground(Color.WHITE);
+        fontSelect.setForeground(Color.BLACK);
+
+        // Schriftgröße Auswahl (z.B. 8 bis 48 in Steps)
+        Integer[] sizes = {8, 10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48};
+        fontSizeSelect = new JComboBox<>(sizes);
+        fontSizeSelect.setSelectedItem(12);
+        fontSizeSelect.setBackground(Color.WHITE);
+        fontSizeSelect.setForeground(Color.BLACK);
+
+        // 3. Zeile: Labels und Controls für Font und Größe
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+
+        // Label Schriftart
+        gbc.gridx = 0;
+        JLabel fontLabel = new JLabel("Schriftart:");
+        fontLabel.setForeground(Color.WHITE);
+        mainPanel.add(fontLabel, gbc);
+
+        // Font ComboBox
+        gbc.gridx = 1;
+        mainPanel.add(fontSelect, gbc);
+
+        // Label Schriftgröße
+        gbc.gridx = 2;
+        JLabel fontSizeLabel = new JLabel("Größe:");
+        fontSizeLabel.setForeground(Color.WHITE);
+        mainPanel.add(fontSizeLabel, gbc);
+
+        // FontSize ComboBox
+        gbc.gridx = 3;
+        mainPanel.add(fontSizeSelect, gbc);
+
         setVisible(true);
     }
 
+    @Override
     public JToggleButton[] getToggleButtons() {
-        return new JToggleButton[]{ lightModeToggle, darkModeToggle };
+        return new JToggleButton[]{lightModeToggle, darkModeToggle};
     }
 
-    public Dimension getStartDimension() {
-        return startDimension;
+    @Override
+    public Dimension getTrueDimension() {
+        return trueDimension;
     }
+
+    @Override
+    public JComboBox<String> getFontSelect() {
+        return fontSelect;
+    }
+
+    @Override
+    public JComboBox<Integer> getFontSizeSelect() {
+        return fontSizeSelect;
+    }
+
+    @Override
+    public void setLanguage(String language) {
+        // Implement language change logic here if needed
+        //TODO: Implement language change logic here if needed
+    }
+
+    @Override
+    public void setDarkMode(boolean darkMode) {
+        // Implement dark mode logic here if needed
+        //TODO: Implement dark mode logic here if needed
+    }
+
+    @Override
+    public void setFont(String fontName, int fontSize) {
+        // Implement font setting logic here if needed
+        //TODO: Implement font setting logic here if needed
+    }
+
 }

@@ -41,7 +41,7 @@ import java.util.stream.IntStream;
 
 import main.data.ChemicalElement;
 import main.data.PeriodicTable;
-import main.interfaces.FixElementWindow;
+import main.interfaces.AdjustableElementWindow;
 
 /**
  * ElementWindow is a JFrame that displays detailed information about a specific chemical element.
@@ -51,7 +51,7 @@ import main.interfaces.FixElementWindow;
  * color in the periodic table.
  * 
  */
-public class ElementWindow extends JFrame implements FixElementWindow {
+public class ElementWindow extends JFrame implements AdjustableElementWindow {
 
     /**
      * The atomic number of the element displayed in this window.
@@ -217,5 +217,26 @@ public class ElementWindow extends JFrame implements FixElementWindow {
      */
     public Dimension getTrueDimension() {
         return this.TRUE_DIMENSION;
+    }
+
+    @Override
+    public void setLanguage(String language) {
+        // This method can be implemented to change the language of the window.
+        // Currently, it does nothing as the element names are already set in the constructor.
+        //TODO: Implement language change functionality
+    }
+
+    @Override
+    public void setDarkMode(boolean darkMode) {
+        // This method can be implemented to change the theme of the window.
+        // Currently, it does nothing as the background color is set based on the element's color.
+        //TODo: Implement dark mode functionality
+    }
+
+    @Override
+    public void setFont(String fontName, int fontSize) {
+        // This method can be implemented to change the font of the window.
+        // Currently, it does nothing as the font is set in the constructor.
+        //TODO: Implement font change functionality
     }
 }

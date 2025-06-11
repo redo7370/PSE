@@ -25,39 +25,23 @@
 
 package main.interfaces;
 
-import java.awt.Font;
+import java.awt.Dimension;
 
-/** Font controller interface for managing font-related operations
- * This interface defines methods to retrieve fonts, supported font names,
- * default font size, and default font name.
- * Implementations of this interface should provide the actual font retrieval logic.
+/**
+ * FixElementWindow is an interface that represents a window displaying information
+ * about a specific chemical element in the periodic table.
+ * It provides a method to retrieve the element number associated with the window.
+ * This interface is used to ensure that all element windows implement a consistent
+ * method for accessing the element number.
  */
-public interface FontController {
+public interface ElementWindowTemplate {
 
     /**
-     * Retrieves a Font object based on the specified font name and size.
-     * If the font is not available, it should return a default font.
-     * @param fontName
-     * @param size
-     * @return
+     * Retrieves the atomic number of the element displayed in this window.
+     * The atomic number is a byte value representing the unique identifier for the element.
+     *
+     * @return The atomic number of the element as a byte.
      */
-    Font getFont(String fontName, int size);
-
-    /**
-     * Returns an array of supported font names.
-     * @return An array of strings representing supported font names.
-     */
-    String[] getSupportedFonts();
-    
-    /**
-     * Returns the default font size.
-     * @return An integer representing the default font size.
-     */
-    int getDefaultFontSize();
-
-    /**
-     * Returns the default font name.
-     * @return A string representing the default font name.
-     */
-    String getDefaultFontName();
+    byte getElementNum();
+    Dimension getTrueDimension();
 }

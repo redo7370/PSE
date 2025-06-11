@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
 
 import java.awt.Frame;
 import java.awt.event.MouseAdapter;
@@ -38,6 +39,8 @@ import java.awt.event.MouseEvent;
 import main.data.ChemicalElement;
 import main.data.Elements;
 import main.data.PeriodicTable;
+import main.interfaces.AdjustableElementWindow;
+import main.interfaces.AdjustableMenuWindow;
 import main.interfaces.MouseController;
 import main.ui.ElementWindow;
 import main.ui.MenuWindow;
@@ -77,49 +80,67 @@ public class MouseEventHandler implements MouseController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            // Falls das Event vom PSE Fenster kommt (nicht Label oder Button)
-            if (e.getSource() instanceof PSE pseFrame) {
-                if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !pseFrame.getSize().equals(pseFrame.getTrueDimension())) {
-                    pseFrame.setSize(pseFrame.getTrueDimension());
-                    pseFrame.setLocationRelativeTo(null);
+            Object source = e.getSource();
+            int clickCount = e.getClickCount();
+            boolean isLeftMouseButton = SwingUtilities.isLeftMouseButton(e);
+
+            switch (source) {
+
+                case PSE pseFrame -> {
+                    if (clickCount == 2 && isLeftMouseButton 
+                            && !pseFrame.getSize().equals(pseFrame.getTrueDimension())) {
+                        pseFrame.setSize(pseFrame.getTrueDimension());
+                        pseFrame.setLocationRelativeTo(null);
+                    }
+                    return;
+                }  
+
+                case ElementWindow ewFrame -> {
+                    if (clickCount == 2 && isLeftMouseButton 
+                            && !ewFrame.getSize().equals(ewFrame.getTrueDimension())) {
+                        ewFrame.setSize(ewFrame.getTrueDimension());
+                        ewFrame.setLocationRelativeTo(null);
+                    }
+                    return;
                 }
-                return;
-            } else if (e.getSource() instanceof ElementWindow ewFrame) {
-                if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e) 
-                        && !ewFrame.getSize().equals(ewFrame.getTrueDimension())) {
-                    ewFrame.setSize(ewFrame.getTrueDimension());
-                    ewFrame.setLocationRelativeTo(null);
+
+                case JButton button -> {
+                        for (Frame frame : Frame.getFrames()) {
+                            if (frame instanceof AdjustableMenuWindow mw && frame.isDisplayable()) {
+                                ((JFrame) mw).toFront();
+                                ((JFrame) mw).requestFocus();
+                                ((JFrame) mw).setState(Frame.NORMAL);
+                                return;
+                            }
+                        }
+                        AdjustableMenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
+                        app.getMouseListener().registerWindow((JFrame) mw);
+                        app.getWindowListener().registerWindow((JFrame) mw);
+                        ((JFrame) mw).requestFocus();
+                        ((JFrame) mw).setState(Frame.NORMAL);
+                        return;
+                }
+
+                case JLabel label -> {
+                    // Do nothing for JLabel, handled below
+                    break;
+                }
+
+                default -> {
+                    // Do nothing for other sources
+                    return;
                 }
             }
-
-            // Menübutton-Klick
-            if (e.getSource() instanceof JButton button && "Menü".equals(button.getText())) {
-                for (Frame frame : Frame.getFrames()) {
-                    if (frame instanceof main.ui.MenuWindow mw && frame.isDisplayable()) {
-                        mw.toFront();
-                        mw.requestFocus();
-                        mw.setState(Frame.NORMAL);
-                        return;
-                    }
-                }
-                MenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
-                app.getMouseListener().registerWindow(mw); //TODO: Remove MouseListener from MenuWindow
-                app.getWindowListener().registerWindow(mw);
-                mw.requestFocus();
-                mw.setState(Frame.NORMAL);
-                return;
-            } 
             
             // Nur Labels behandeln
-            if (!(e.getSource() instanceof JLabel label)) {
+            if (!(source instanceof JLabel label)) {
                 return;
             }
 
             String symbol = label.getName();  // Symbol wurde vorher per setName() gesetzt
 
             if (symbol == null || symbol.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Bitte ein Element eingeben.");
+                JOptionPane.showMessageDialog(null, "Bitte ein Element wählen.");
                 return;
             }
 
@@ -144,11 +165,11 @@ public class MouseEventHandler implements MouseController {
                 }
             }
 
-            ElementWindow ew = new ElementWindow(element);
-            ew.requestFocus();
-            ew.setState(Frame.NORMAL);
-            app.getMouseListener().registerWindow(ew);
-            app.getWindowListener().registerWindow(ew);
+            AdjustableElementWindow ew = new ElementWindow(element);
+            ((JFrame)ew).requestFocus();
+            ((JFrame)ew).setState(Frame.NORMAL);
+            app.getMouseListener().registerWindow((JFrame)ew);
+            app.getWindowListener().registerWindow((JFrame)ew);
         }
     };
 

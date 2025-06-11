@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch PSEApp",
+      "request": "launch",
+      "mainClass": "main.App",
+      "vmArgs": "-cp 'bin:lib/*' -Xmx128m -Xms128m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:+UseStringDeduplication -XX:+UseCompressedOops -XX:TieredStopAtLevel=4",
+    }
+  ]
+}
