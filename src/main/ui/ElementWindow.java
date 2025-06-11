@@ -230,7 +230,7 @@ public class ElementWindow extends JFrame implements AdjustableElementWindow {
     public void setDarkMode(boolean darkMode) {
         // This method can be implemented to change the theme of the window.
         // Currently, it does nothing as the background color is set based on the element's color.
-        //TODo: Implement dark mode functionality
+        //TODO: Implement dark mode functionality
     }
 
     @Override
