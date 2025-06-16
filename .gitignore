@@ -1,5 +1,6 @@
 .DS_Store
-lib/*
+lib/sqlite-jdbc-3.49.1.0.jar
+lib/sqlite-jdbc.properties
 bin/*
 dependencies/runtime/*
 settings.db
