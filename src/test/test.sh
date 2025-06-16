@@ -88,13 +88,14 @@ if [ "$failed" -ne 0 ]; then
         }
     ' test_output.txt
 
-
-
-
 fi
 
 printf "\033[1;34m Total Tests:\033[0m \033[1m%s\033[0m   \033[1;32m Passed:\033[0m \033[1m%s\033[0m   \033[1;31m Failed:\033[0m \033[1m%s\033[0m\n" "$total" "$passed" "$failed"
 
 rm test_output.txt
+
+if [ "$failed" -ne 0 ]; then
+    exit 1
+fi
 
 exit 0

@@ -6,7 +6,7 @@
       "name": "Launch PSEApp",
       "request": "launch",
       "mainClass": "main.App",
-      "vmArgs": "-cp 'bin:lib/*' -Xmx128m -Xms128m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:+UseStringDeduplication -XX:+UseCompressedOops -XX:TieredStopAtLevel=4",
+      "vmArgs": "-cp 'bin:lib/*' -Xlog:gc* -Xmx128m -Xms128m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:+UseStringDeduplication -XX:+UseCompressedOops -XX:G1ReservePercent=10 -XX:InitiatingHeapOccupancyPercent=20 -XX:TieredStopAtLevel=4 -Dsun.java2d.opengl=true -Dsun.awt.noerasebackground=true -XX:MaxTenuringThreshold=1",
     }
   ]
 }
