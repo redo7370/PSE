@@ -110,8 +110,7 @@ public class App {
      * all GUI-related operations are performed in a thread-safe manner.
      */
     private void start() {
-
-        this.invokeMemoryMonitor();
+        this.invokeMemoryMonitor();  // Optional, removed on release
 
         mc = new MouseEventHandler(this);
         wc = new WindowEventHandler();

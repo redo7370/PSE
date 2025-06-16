@@ -38,7 +38,6 @@ import java.awt.event.MouseEvent;
 
 import main.data.ChemicalElement;
 import main.data.Elements;
-import main.data.PeriodicTable;
 import main.interfaces.AdjustableElementWindow;
 import main.interfaces.AdjustableMenuWindow;
 import main.interfaces.MouseController;
@@ -113,7 +112,7 @@ public class MouseEventHandler implements MouseController {
                                 return;
                             }
                         }
-                        AdjustableMenuWindow mw = new MenuWindow(PeriodicTable.getMAINBG());
+                        AdjustableMenuWindow mw = new MenuWindow();
                         app.getMouseListener().registerWindow((JFrame) mw);
                         app.getWindowListener().registerWindow((JFrame) mw);
                         ((JFrame) mw).requestFocus();

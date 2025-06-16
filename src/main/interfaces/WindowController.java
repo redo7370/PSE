@@ -25,7 +25,7 @@
 
 package main.interfaces;
 
-import java.awt.Frame;
+import javax.swing.JFrame;
 
 /**
  * WindowController is an interface that defines methods for managing window events
@@ -49,5 +49,7 @@ public interface WindowController {
      *
      * @param frame The Frame instance to register.
      */
-    void registerWindow(Frame frame);
+    void registerWindow(JFrame frame);
+
+    void unregisterWindow(JFrame frame);
 }

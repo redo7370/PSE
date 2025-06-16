@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import main.data.PeriodicTable;
 import main.interfaces.AdjustableMenuWindow;
 
 import javax.swing.BorderFactory;
@@ -29,6 +30,7 @@ public class MenuWindow extends JFrame implements AdjustableMenuWindow{
     private final Dimension trueDimension = new Dimension(350, 220);
     private final JComboBox<String> fontSelect;
     private final JComboBox<Integer> fontSizeSelect;
+    private final Color MAINBG; // Hintergrundfarbe des Fensters, z.B. Wasserstoff-Farbe
 
     /**
      * Constructor for the MenuWindow class.
@@ -38,14 +40,15 @@ public class MenuWindow extends JFrame implements AdjustableMenuWindow{
      *
      * @param bg The background color for the window.
      */
-    public MenuWindow(Color bg) {
+    public MenuWindow() {
+        this.MAINBG = PeriodicTable.getMAINBG();
         setTitle("Menü");
         setSize(trueDimension);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBackground(bg);
+        setBackground(this.MAINBG); // Set background color to Hydrogen color
 
         JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(bg);
+        mainPanel.setBackground(this.MAINBG);
         this.add(mainPanel);
 
         GridBagLayout gbl = new GridBagLayout();

@@ -77,7 +77,7 @@ public class MemoryMonitor implements Runnable {
                     usedMemory, freeMemory, totalMemory, maxMemory);
 
             try {
-                Thread.sleep(1000);  // alle 0,5 Sekunden aktualisieren
+                Thread.sleep(3000);  // alle 0,5 Sekunden aktualisieren
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;

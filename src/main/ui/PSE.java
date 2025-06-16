@@ -89,7 +89,7 @@ public class PSE extends JFrame implements AdjustablePSE{
     public PSE() {
         setTitle("Periodensystem der Elemente");
         setSize(1000, 300);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(PeriodicTable.getMAINBG());
 
         TRUE_DIMENSION = getSize();

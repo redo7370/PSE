@@ -32,9 +32,10 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Frame;
 
 /**
  * WindowEventHandler is a service that manages window events in the application.
@@ -48,7 +49,7 @@ public class WindowEventHandler implements WindowController {
      * A list that keeps track of all open windows in the application.
      * This is used to monitor when the last window is closed, allowing the application to exit gracefully.
      */
-    private final List<Frame> openWindows = new ArrayList<>();
+    private final List<JFrame> openWindows = new ArrayList<>();
 
     /**
      * WindowListener that listens for window close events.
@@ -58,7 +59,9 @@ public class WindowEventHandler implements WindowController {
     private final WindowListener windowListener = new WindowAdapter() {
         @Override
         public void windowClosed(WindowEvent e) {
-            openWindows.remove(e.getSource());
+            JFrame frame = (JFrame) e.getSource();
+            openWindows.remove(frame);
+            unregisterWindow(frame);
             if (openWindows.isEmpty()) {
                 System.exit(0);
             }
@@ -79,7 +82,7 @@ public class WindowEventHandler implements WindowController {
      */
     @Override
     public void addWindowListener(Object obj) {
-        if (obj instanceof Frame frame) {
+        if (obj instanceof JFrame frame) {
             registerWindow(frame);
         }
     }
@@ -91,12 +94,17 @@ public class WindowEventHandler implements WindowController {
      *
      * @param frame the Frame instance to register
      */
-    public void registerWindow(Frame frame) {
+    public void registerWindow(JFrame frame) {
         if (!openWindows.contains(frame)) {
             if (!(frame instanceof ElementWindow)){
                 openWindows.add(frame);
             }
             frame.addWindowListener(windowListener);
         }
+    }
+
+    public void unregisterWindow(JFrame frame) {
+        openWindows.remove(frame);
+        frame.removeWindowListener(windowListener);
     }
 }
