@@ -26,17 +26,22 @@
  '''
 
 #!/bin/bash
+set -e
 
 JUNIT="lib/junit-4.13.2.jar"
 HAMCREST="lib/hamcrest-core-1.3.jar"
+BIN_DIR="bin"
 
-javac -d bin -cp "bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" src/test/PSETest.java src/**/*.java
-if [ $? -ne 0 ]; then
-    echo "Kompilierung fehlgeschlagen"
-    exit 1
-fi
+# Erstelle das bin-Verzeichnis falls nicht vorhanden
+mkdir -p $BIN_DIR
 
-java -cp "bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore test.PSETest > test_output.txt
+# Kompiliere alle Java-Dateien aus src (inkl. Unterordner)
+javac -d $BIN_DIR -cp "$BIN_DIR:$JUNIT:$HAMCREST" $(find src -name "*.java")
+
+echo "Kompilierung erfolgreich."
+
+# Starte die Tests mit JUnit (Annahme: Testklasse ist test.PSETest)
+java -cp "$BIN_DIR:$JUNIT:$HAMCREST" org.junit.runner.JUnitCore test.PSETest > test_output.txt 2>&1
 
 total=0
 passed=0
