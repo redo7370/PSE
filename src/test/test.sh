@@ -35,7 +35,7 @@ mkdir -p $BIN_DIR
 # Kompiliere alle Java-Dateien aus src (inkl. Unterordner)
 javac -d $BIN_DIR -cp "$BIN_DIR:$JUNIT:$HAMCREST" $(find src -name "*.java")
 
-echo "Kompilierung erfolgreich."
+echo "Compilation success."
 
 # Starte die Tests mit JUnit (Annahme: Testklasse ist test.PSETest)
 java -cp "$BIN_DIR:$JUNIT:$HAMCREST" org.junit.runner.JUnitCore test.PSETest > test_output.txt 2>&1
