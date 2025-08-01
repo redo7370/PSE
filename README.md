@@ -28,31 +28,38 @@ Each release includes the necessary Temurin JDK 21 – no Java installation requ
 #### Requirements
 
 - Java 21 (e.g. Adoptium Temurin JDK 21)
-- Unix-like shell (for `run_test.sh`)
+- Gradle (wrapper included)
 
-#### Compile & Run
-
-```bash
-cd src/main
-javac App.java
-java main.App
-```
-
-Or use the build and run script (experimental):
+#### Build & Run
 
 ```bash
-./run_test.sh
+# Build the project
+./gradlew build
+
+# Run the application
+./gradlew run
+
+# Run tests
+./gradlew test
 ```
 
 ## Project Structure
 
-Main directories include:
+This project uses Gradle as the build system. Main directories include:
 
-- `src/` – Java source code  
-- `bin/` – Compiled `.class` files  
-- `res/` – Fonts and icons  
-- `docs/` – Javadoc and licenses  
+- `app/src/main/java/` – Java source code organized by packages
+  - `start/` – Application entry point
+  - `ui/` – User interface components
+  - `data/` – Data models and periodic table data
+  - `interfaces/` – Interface definitions
+  - `services/` – Business logic and event handlers
+  - `util/` – Utility classes
+- `app/src/main/resources/` – Fonts, icons, and other resources
+- `app/src/test/java/` – Unit tests
+- `app/build/` – Compiled classes and build artifacts
 - `lib/` – External dependencies (JUnit, SQLite JDBC)
+- `gradle/` – Gradle wrapper and version catalog
+- `LICENSES/` – Third-party license files
 
 ## License
 
